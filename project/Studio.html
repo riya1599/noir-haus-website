@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/typography.css">
 <link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/spacing.css">
 <link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/effects.css">
-<script src="image-slot.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg-page);color:var(--text-primary);font-family:var(--font-sans)}
@@ -74,7 +73,7 @@ section.st-beliefs{padding:0;position:relative;z-index:1;background:var(--bg-sur
 
 section.st-founder{padding:var(--space-9) 0 var(--space-10);position:relative;z-index:1}
 .founder-media{grid-column:1/5;align-self:start}
-.founder-media image-slot{display:block;width:100%;aspect-ratio:3/4;border-radius:8px;overflow:hidden}
+.founder-media img{display:block;width:100%;aspect-ratio:3/4;border-radius:8px;overflow:hidden;object-fit:cover}
 .founder-copy{grid-column:6/13;padding-top:var(--space-4)}
 .founder-name{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(2rem,3.6vw,2.8rem);letter-spacing:var(--ls-heading);color:var(--text-primary);margin-top:var(--space-5)}
 .founder-title{font-size:12px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--accent);margin-top:8px}
@@ -315,7 +314,7 @@ section.st-closing{padding:var(--space-7) 0 var(--space-6)}
 
 <section class="st-founder" id="founder" style="background-color: var(--noir-100)">
 <div class="grid">
-<div class="founder-media io-fade"><image-slot id="founder-photo" shape="rect" src="founder-photo.webp" placeholder="Riya Patel — portrait"></image-slot></div>
+<div class="founder-media io-fade"><img src="founder-photo.webp" alt="Riya Patel — portrait"></div>
 <div class="founder-copy io-fade">
 <div class="st-label" style="color: var(--noir-700)"><span class="dot"></span>The Person Behind It</div>
 <h2 class="founder-name" style="color: var(--noir-950)">Riya Patel</h2>
