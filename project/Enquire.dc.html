@@ -258,8 +258,11 @@ body.eq-active .scroll-top{display:none}
 </div>
 </div>
 </div>
-<!-- Connect a form service by setting data-endpoint (e.g. a Formspree/Basin URL). Empty = prototype, nothing is sent. -->
-<form class="eq-view eq-flow" id="enquiry" novalidate data-endpoint="" hidden>
+<!-- Wired to Netlify Forms: name + data-netlify + hidden form-name/subject/honeypot fields below. -->
+<form class="eq-view eq-flow" id="enquiry" name="noir-haus-enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate hidden>
+<input type="hidden" name="form-name" value="noir-haus-enquiry">
+<input type="hidden" name="subject" value="New Noir Haus enquiry">
+<p hidden><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 <div class="grid"><div class="eq-prog"><span class="eq-count"><b>01</b> / 06</span><span class="eq-name">Services</span></div><div class="eq-track"><i></i></div></div>
 <section class="eq-step grid" data-name="Services" data-req="many" role="group" aria-labelledby="q1" hidden>
 <div class="eq-q"><h2 class="eq-h" id="q1">What are you looking for?</h2><p class="eq-hint">Choose as many as you like.</p></div>
@@ -361,8 +364,9 @@ back.addEventListener('click',()=>{if(cur===0){view(intro);toTop()}else go(cur-1
 next.addEventListener('click',()=>{const e=check(cur);if(e){say(e,true);return}if(cur<N-1)go(cur+1);else form.requestSubmit()});
 form.addEventListener('input',e=>{if(msg.classList.contains('is-err'))say('');if(e.target.name==='note')summary()});
 form.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();next.click()}});
-form.addEventListener('submit',async e=>{e.preventDefault();const ep=form.dataset.endpoint;
-if(ep){next.disabled=true;try{const r=await fetch(ep,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!r.ok)throw 0}catch(_){next.disabled=false;say('This didn’t send. Please try again, or email hello@thenoirhaus.com.',true);return}}
+form.addEventListener('submit',async e=>{e.preventDefault();next.disabled=true;
+try{const body=new URLSearchParams(new FormData(form)).toString();const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});if(!r.ok)throw 0}
+catch(_){next.disabled=false;say('This didn’t send. Please try again, or email hello@thenoirhaus.com.',true);return}
 view(done);toTop();const h=done.querySelector('.eq-h1');if(h)h.focus({preventScroll:true})});
 })();
 </script>
