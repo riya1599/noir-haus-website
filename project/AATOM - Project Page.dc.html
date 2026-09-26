@@ -198,6 +198,7 @@ nav.primary.open a:nth-child(3){transition-delay:.22s}
 .nav-cta{margin-top:24px;background:none;border:1px solid var(--border-strong);border-radius:240px;padding:12px 28px;width:auto;text-align:center;font-size:14px!important;color:var(--text-primary)!important}
 .nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent)}
 nav.primary a:not(.nav-cta)::after{left:auto;right:0;bottom:auto;top:50%;transform:translateY(-50%) scale(.4);margin:0}
+nav.primary a[aria-current]:not(.nav-cta)::after{opacity:1;transform:translateY(-50%) scale(1)}
 nav.primary a:not(.nav-cta):hover::after,nav.primary a:not(.nav-cta):active::after{opacity:1;transform:translateY(-50%) scale(1)}
 .next-project{padding:var(--space-6) 0 var(--space-7)}
 .next-link{font-size:clamp(1.6rem,7vw,2.2rem)}

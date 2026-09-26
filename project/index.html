@@ -136,6 +136,7 @@ nav.primary.open a:nth-child(4){transition-delay:.29s}
 .nav-cta{margin-top:24px;background:none;border:1px solid var(--border-strong);border-radius:240px;padding:12px 28px;width:auto;text-align:center;font-size:14px!important;color:var(--text-primary)!important}
 .nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent)}
 nav.primary a:not(.nav-cta)::after{left:auto;right:0;bottom:auto;top:50%;transform:translateY(-50%) scale(.4);margin:0}
+nav.primary a[aria-current]:not(.nav-cta)::after{opacity:1;transform:translateY(-50%) scale(1)}
 nav.primary a:not(.nav-cta):hover,nav.primary a:not(.nav-cta):active{color:var(--accent)}
 nav.primary a:not(.nav-cta):hover::after,nav.primary a:not(.nav-cta):active::after{opacity:1;transform:translateY(-50%) scale(1)}
 main.hero{padding:var(--space-8) 0;justify-content:flex-start}
