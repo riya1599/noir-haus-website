@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Enquire — The Noir Haus</title>
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/colors.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/typography.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/effects.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg-page);color:var(--text-primary);font-family:var(--font-sans)}
+body{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--space-5);max-width:var(--container-max);width:100%;margin:0 auto;padding:0 60px}
+
+header.site{padding:14px 0;border-bottom:1px solid var(--border-subtle);position:sticky;top:0;background:var(--bg-page);z-index:30;transform:translateY(0);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+header.site.nav-hidden{transform:translateY(-100%)}
+header.site .grid{align-items:center}
+.logo{grid-column:1/5;display:flex;align-items:center}
+.logo img{height:57px;width:auto;display:block}
+nav.primary{grid-column:9/13;display:flex;align-items:center;justify-content:flex-end;gap:40px}
+nav.primary a{position:relative;font-size:13px;font-weight:var(--fw-regular);letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;width:4px;height:4px;margin:0 auto;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a:hover::after,nav.primary a:active::after{opacity:1;transform:scale(1)}
+.nav-cta{border:1px solid var(--border-strong);padding:8px 18px;border-radius:240px;background:var(--noir-950);color:#fff!important;transition:background .5s cubic-bezier(.16,.8,.24,1)}
+.nav-cta::after{display:none}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent);color:#fff!important}
+.menu-toggle{display:none;grid-column:12/13;justify-self:end;width:32px;height:22px;position:relative;background:none;border:none;padding:0;cursor:pointer;z-index:21}
+.menu-toggle span{position:absolute;left:6px;top:10px;width:20px;height:2px;background:var(--text-primary);transition:transform .35s,opacity .35s,background .35s}
+.menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;left:0;height:2px;background:var(--text-primary);transition:transform .35s,width .35s,left .35s}
+.menu-toggle span::before{top:-8px;width:26px;left:-4px}
+.menu-toggle span::after{top:8px;width:16px;left:2px}
+.menu-toggle.open span{background:transparent}
+.menu-toggle.open span::before{top:0;left:-6px;width:24px;transform:rotate(45deg)}
+.menu-toggle.open span::after{top:0;left:-6px;width:24px;transform:rotate(-45deg)}
+.menu-toggle.open span::before,.menu-toggle.open span::after{background:var(--text-primary)}
+
+.scroll-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;background:var(--noir-950);border:1px solid var(--border-strong);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:40;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .4s,transform .4s,background .4s}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--accent);border-color:var(--accent)}
+.scroll-top svg{width:18px;height:18px}
+@media (max-width:640px){.scroll-top{right:16px;bottom:16px;width:44px;height:44px}}
+
+main{flex:1}
+img{display:block;max-width:100%}
+
+/* enquire */
+[hidden]{display:none!important}
+.k{display:flex;gap:14px;align-items:baseline;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase}
+.eq{padding:var(--space-8) 0 var(--space-9)}
+.eq-view,.eq-step{opacity:0;transform:translateY(8px);transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1)}
+.eq-view.is-on,.eq-step.is-on{opacity:1;transform:none}
+.eq-intro .k{grid-column:1/13;justify-content:space-between;color:var(--text-secondary)}
+.eq-h1{grid-column:1/12;margin-top:var(--space-8);font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(3rem,8.4vw,8rem);line-height:.94;letter-spacing:var(--ls-heading);text-wrap:balance}
+.eq-lede{grid-column:7/12;margin-top:var(--space-7);display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-4);font-size:17px;line-height:1.7;color:var(--text-secondary);text-wrap:pretty}
+.eq-lede .btn{margin-top:var(--space-4)}
+.eq-intro .eq-h1{grid-column:1/10;font-size:clamp(1.8rem,3.4vw,3.1rem);line-height:1.15;font-weight:300;text-wrap:pretty}
+.eq-intro .eq-lede{grid-column:1/13;margin-top:var(--space-8)}
+.eq-intro .eq-lede .btn{margin-top:0}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 28px;border-radius:240px;background:var(--noir-950);color:#fff;border:1px solid var(--noir-950);font:inherit;font-size:15px;letter-spacing:.01em;cursor:pointer;white-space:nowrap;transition:background .5s cubic-bezier(.16,.8,.24,1),border-color .5s cubic-bezier(.16,.8,.24,1)}
+.btn .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1),color .5s cubic-bezier(.16,.8,.24,1)}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn:hover .arrow{color:#fff;transform:translateX(4px)}
+.btn:active{opacity:.8}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-lg{min-height:64px;padding:0 36px;font-size:17px}
+.lnk{background:none;border:0;font:inherit;font-size:12px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary);cursor:pointer;min-height:44px;padding:0;display:inline-flex;align-items:center;gap:8px;transition:color .3s cubic-bezier(.4,0,.2,1)}
+.lnk:hover{color:var(--accent)}
+.eq-prog{grid-column:1/13;display:flex;justify-content:space-between;gap:var(--space-4);font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary)}
+.eq-count b{font-weight:var(--fw-regular);color:var(--text-primary)}
+.eq-track{grid-column:1/13;height:1px;background:var(--border-subtle);margin-top:14px;position:relative}
+.eq-track i{position:absolute;left:0;top:-.5px;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.eq-step{margin-top:var(--space-8);align-items:start;min-height:min(52vh,500px);border:0;min-width:0}
+.eq-q{grid-column:1/6;display:flex;flex-direction:column;gap:var(--space-4)}
+.eq-h{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1;letter-spacing:var(--ls-heading);text-wrap:balance}
+.eq-hint{font-size:15px;line-height:1.7;color:var(--text-secondary);max-width:36ch;text-wrap:pretty}
+.eq-a{grid-column:7/13;min-width:0}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{position:relative;display:flex;align-items:center;gap:14px;min-height:64px;padding:16px 20px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--bg-page);font-size:16px;line-height:1.35;cursor:pointer;transition:border-color .3s cubic-bezier(.4,0,.2,1),background .3s cubic-bezier(.4,0,.2,1)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.opt .ix{flex:none;width:14px;height:14px;border:1px solid var(--border-strong);border-radius:2px;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.opt input[type="radio"]+.ix{border-radius:50%}
+.opt:hover{border-color:var(--border-strong)}
+.opt:has(input:checked){border-color:var(--accent);background:color-mix(in oklch,var(--accent) 6%,var(--bg-page))}
+.opt input:checked+.ix{background:var(--accent);border-color:var(--accent)}
+.opt input[type="checkbox"]:checked+.ix::after{content:"";width:7px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+.opt input[type="radio"]:checked+.ix::after{content:"";width:4px;height:4px;border-radius:50%;background:#fff}
+.opt input:focus-visible+.ix{outline:2px solid var(--accent);outline-offset:3px}
+.opt-d{align-items:flex-start}.opt-d .ix{margin-top:4px}
+.opt-t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.opt-t small{font-size:13px;line-height:1.45;color:var(--text-secondary)}
+.eq-ta{display:block;width:100%;min-height:240px;border:0;border-bottom:1px solid var(--border-strong);border-radius:0;background:transparent;font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1.3rem,2vw,1.75rem);line-height:1.4;letter-spacing:var(--ls-heading);color:var(--text-primary);padding:0 0 16px;resize:vertical;outline:none;transition:border-color .3s cubic-bezier(.4,0,.2,1)}
+.eq-ta.sm{min-height:140px}
+.eq-ta::placeholder,.fld input::placeholder{color:var(--text-secondary);opacity:.7}
+.eq-ta:focus,.fld input:focus{border-color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6) var(--space-5)}
+.fld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fld>span{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary)}
+.fld>span em{font-style:normal;opacity:.7}
+.fld input{width:100%;border:0;border-bottom:1px solid var(--border-strong);border-radius:0;background:transparent;font:inherit;font-size:20px;padding:10px 0;color:var(--text-primary);outline:none;transition:border-color .3s cubic-bezier(.4,0,.2,1)}
+.sum{margin-top:var(--space-7)}
+.sum-h{padding-bottom:12px;border-bottom:1px solid var(--text-primary);color:var(--text-primary)}
+.sum dl{margin:0}
+.sum-row{display:grid;grid-template-columns:minmax(0,10rem) minmax(0,1fr) auto;gap:var(--space-4);padding:14px 0;border-bottom:1px solid var(--border-subtle);align-items:baseline}
+.sum-row dt{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary)}
+.sum-row dd{margin:0;font-size:16px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.sum-row .lnk{min-height:0;font-size:11px}
+.eq-actions{margin-top:var(--space-8)}
+.eq-act{grid-column:1/13;display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);padding-top:var(--space-5);border-top:1px solid var(--border-subtle)}
+.eq-msg{flex:1;text-align:right;font-size:14px;line-height:1.5;color:var(--text-secondary)}
+.eq-msg.is-err{color:var(--text-primary)}
+.eq-msg.is-err::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:middle}
+.eq-done .eq-lede{grid-column:1/8}
+.eq-home{font-family:var(--font-display);font-size:clamp(1.25rem,2vw,1.6rem);letter-spacing:var(--ls-heading);color:var(--text-primary);display:inline-flex;gap:10px;align-items:baseline}
+.eq-home .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.eq-home:hover .arrow{transform:translateX(6px)}
+/* next project */
+.next-project{padding:var(--space-8) 0 var(--space-9);background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw)}
+.next-inner{grid-column:1/13;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6)}
+.next-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.5)}
+.next-link{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:var(--ls-heading);color:var(--text-on-dark);display:inline-flex;align-items:center;gap:14px;transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover{color:var(--accent)}
+.next-link .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover .arrow{transform:translateX(10px)}
+.next-link{font-size:clamp(1.25rem,2vw,1.75rem)!important;font-weight:var(--fw-regular)}
+.next-link.prev:hover .arrow{transform:translateX(-10px)}
+
+.site-footer{background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw);position:relative;z-index:1;padding:var(--space-9) 0 var(--space-7);overflow:hidden}
+.site-footer .grid{row-gap:0}
+.ft-cta-row{grid-column:1/13;display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6)}
+.ft-cta-sub{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1rem,1.6vw,1.3rem);line-height:1.4;letter-spacing:var(--ls-heading);color:rgba(255,255,255,.55);text-align:right;max-width:32ch}
+.ft-cta{display:flex;align-items:baseline;gap:var(--space-3);width:fit-content;font-family:var(--font-display);font-weight:var(--fw-regular);letter-spacing:var(--ls-heading);font-size:clamp(2.6rem,5.6vw,4.8rem);color:var(--text-on-dark);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta:hover{color:var(--accent)}
+.ft-cta:hover .arrow{transform:translateX(10px)}
+.ft-cta:active{opacity:.8}
+.ft-divider{grid-column:1/13;border-top:1px solid rgba(255,255,255,.14);margin-top:var(--space-8)}
+.ft-brand{grid-column:1/6;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-brand-name{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:var(--fs-h4);letter-spacing:var(--ls-heading);color:var(--text-on-dark)}
+.ft-brand-desc{font-size:13px;line-height:1.6;color:rgba(255,255,255,.55);max-width:38ch}
+.ft-copy{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+.ft-group{grid-column:span 3;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-explore{grid-column:7/10}
+.ft-contact{grid-column:10/13}
+.ft-group-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
+.ft-group a{font-size:13px;color:rgba(255,255,255,.75);transition:color .5s cubic-bezier(.16,.8,.24,1);width:fit-content}
+.ft-group a:hover{color:var(--accent)}
+.ft-br{display:none}
+@media (min-width:1025px){.ft-cta-sub{text-align:left;font-size:45px}.ft-cta{width:488px;height:152px;align-items:center}.ft-brand{gap:20px}.ft-br{display:inline}}
+
+@media (max-width:1024px){
+.grid{gap:var(--space-4)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/6}
+nav.primary{grid-column:6/13;gap:var(--space-5)}
+nav.primary a{font-size:12px}
+.site-footer{padding:var(--space-8) 0 var(--space-6)}
+.ft-cta-row{flex-direction:column;align-items:flex-start;gap:var(--space-4)}
+.ft-cta-sub{text-align:left;max-width:60%;box-sizing:border-box;font-size:32px}
+.ft-cta{width:fit-content;white-space:nowrap;font-size:clamp(40px,8.8vw,88px)}
+.ft-brand{display:contents}
+.ft-brand-name{grid-column:1/13;margin-top:var(--space-6);order:1;font-size:clamp(22px,3.4vw,28px)}
+.ft-brand-desc{grid-column:1/13;order:2}
+.ft-copy{grid-column:1/13;order:5;margin-top:var(--space-6)}
+.ft-group-label{font-size:clamp(11px,1.5vw,13px)}
+.ft-group a{font-size:clamp(15px,2vw,18px)}
+.ft-explore{grid-column:1/7;margin-top:var(--space-6);order:3}
+.ft-contact{grid-column:7/13;margin-top:var(--space-6);order:4}
+.next-inner{flex-direction:row;align-items:center;gap:var(--space-4)}
+}
+@media (max-width:640px){
+.grid{gap:0;padding:0 var(--space-5)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/9}
+.logo img{height:35px}
+.menu-toggle{display:block}
+body.menu-open{overflow:hidden}
+body.menu-open header.site,body.menu-open header.site.nav-hidden{transform:none!important}
+body.menu-open header.site{z-index:25}
+nav.primary{position:fixed;top:0;left:0;right:0;height:66.67vh;z-index:20;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:0;padding:32px;visibility:hidden;opacity:0;transform:translateY(-12px);box-shadow:0 40px 80px -20px rgba(30,30,30,.35);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1),visibility 0s linear .5s}
+nav.primary.open{visibility:visible;opacity:1;transform:translateY(0);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a{color:var(--text-primary);font-size:32px;text-transform:none;letter-spacing:0;font-family:var(--font-display);padding:14px 0;width:100%;border-bottom:1px solid var(--border-subtle);opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary.open a{opacity:1;transform:translateY(0)}
+nav.primary.open a:nth-child(1){transition-delay:.08s}
+nav.primary.open a:nth-child(2){transition-delay:.15s}
+nav.primary.open a:nth-child(3){transition-delay:.22s}
+.nav-cta{margin-top:24px;background:none;border:1px solid var(--border-strong);border-radius:240px;padding:12px 28px;width:auto;text-align:center;font-size:14px!important;color:var(--text-primary)!important}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent)}
+nav.primary a:not(.nav-cta)::after{left:auto;right:0;bottom:auto;top:50%;transform:translateY(-50%) scale(.4);margin:0}
+nav.primary a:not(.nav-cta):hover::after,nav.primary a:not(.nav-cta):active::after{opacity:1;transform:translateY(-50%) scale(1)}
+.next-project{padding:var(--space-6) 0 var(--space-7)}
+.next-link{font-size:clamp(1.6rem,7vw,2.2rem)}
+.site-footer{padding:var(--space-7) 0 var(--space-6)}
+.ft-cta-sub{font-size:20px;max-width:none}
+.ft-divider{margin-top:var(--space-6)}
+.ft-brand{margin-top:var(--space-6);gap:10px}
+.ft-brand-name{font-size:clamp(20px,5vw,24px)}
+.ft-brand-desc{font-size:clamp(13px,3.4vw,14px)}
+.ft-copy{padding-bottom:45px;font-size:11px;margin-top:var(--space-5)}
+.ft-group-label{font-size:11px}
+.ft-group a{font-size:clamp(14px,3.6vw,16px)}
+.ft-explore,.ft-contact{grid-column:1/13;margin-top:var(--space-5)}
+}
+
+@media (max-width:1024px){
+.eq-h1{grid-column:1/13}.eq-lede{grid-column:5/13}
+.eq-intro .eq-h1{grid-column:1/12}.eq-intro .eq-lede{grid-column:1/13}
+.eq-q{grid-column:1/13}.eq-a{grid-column:1/13;margin-top:var(--space-6)}.eq-step{min-height:0;margin-top:var(--space-7)}
+.eq-done .eq-lede{grid-column:1/11}
+}
+@media (max-width:640px){
+.eq{padding:var(--space-7) 0 var(--space-8)}
+.eq-intro .k{flex-direction:column;gap:4px}
+.eq-h1{font-size:clamp(2.6rem,12.5vw,3.6rem);margin-top:var(--space-7)}
+.eq-lede{grid-column:1/13;margin-top:var(--space-6);font-size:16px}
+.eq-lede .btn{width:100%;justify-content:center}
+.eq-step{margin-top:var(--space-6)}
+.eq-h{font-size:clamp(2rem,9.5vw,2.6rem)}
+.opts{grid-template-columns:minmax(0,1fr);gap:8px}
+.opt{min-height:56px;padding:14px 16px}
+.fields{grid-template-columns:minmax(0,1fr);gap:var(--space-5)}
+.eq-ta{min-height:200px}
+.eq-actions{position:sticky;bottom:0;z-index:5;background:var(--bg-page);margin-top:var(--space-6)}
+.eq-act{padding:12px 0 calc(12px + env(safe-area-inset-bottom));flex-wrap:wrap;gap:8px 16px}
+.eq-msg{order:-1;flex-basis:100%;text-align:left}.eq-msg:empty{display:none}
+.eq-next{flex:1;justify-content:center}
+.btn-lg{min-height:56px;padding:0 24px;font-size:16px}
+.sum-row{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
+.sum-row dt{grid-row:1;grid-column:1}.sum-row .lnk{grid-row:1;grid-column:2}.sum-row dd{grid-column:1/-1}
+body.eq-active .scroll-top{display:none}
+.eq-intro .eq-h1{grid-column:1/13;font-size:clamp(1.6rem,7.4vw,2.1rem)}
+.eq-intro .eq-lede{grid-column:1/13;margin-top:var(--space-7)}
+}
+</style>
+</head>
+<body>
+<header class="site">
+<div class="grid">
+<a class="logo" href="index.html" aria-label="The Noir Haus" style="height:45px"><img src="./asset-1-3000-msk4z5c7-dc0f.png" alt="The Noir Haus" style="width:56px;height:43px"></a>
+<button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+<nav class="primary">
+<a href="index.html#work">Work</a>
+<a href="Studio.html">Studio</a>
+<a class="nav-cta" href="Enquire.dc.html" aria-current="page">Enquiries</a>
+</nav>
+</div>
+</header>
+<main>
+<section class="eq" data-screen-label="Enquire">
+<div class="eq-view eq-intro is-on">
+<div class="grid">
+<div class="k"><span>Enquire</span><span>Six short questions</span></div>
+<h1 class="eq-h1">Tell us what you're thinking, what you're building, or what needs a little rethinking.<br>We're looking forward to hearing about it.</h1>
+<div class="eq-lede">
+<button type="button" class="btn btn-lg eq-start">Start an enquiry <span class="arrow">→</span></button>
+</div>
+</div>
+</div>
+<!-- Connect a form service by setting data-endpoint (e.g. a Formspree/Basin URL). Empty = prototype, nothing is sent. -->
+<form class="eq-view eq-flow" id="enquiry" novalidate data-endpoint="" hidden>
+<div class="grid"><div class="eq-prog"><span class="eq-count"><b>01</b> / 06</span><span class="eq-name">Services</span></div><div class="eq-track"><i></i></div></div>
+<section class="eq-step grid" data-name="Services" data-req="many" role="group" aria-labelledby="q1" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q1">What are you looking for?</h2><p class="eq-hint">Choose as many as you like.</p></div>
+<div class="eq-a"><div class="opts"><label class="opt opt-d"><input type="checkbox" name="services" value="Brand Identity"><span class="ix"></span><span class="opt-t"><span>Brand Identity</span><small>Logos, visual identities &amp; brand systems</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="UX / UI + Website"><span class="ix"></span><span class="opt-t"><span>UX / UI + Website</span><small>Websites, apps, digital products &amp; user experiences</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="Print &amp; Packaging"><span class="ix"></span><span class="opt-t"><span>Print &amp; Packaging</span><small>Brochures, packaging, stationery &amp; physical touchpoints</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="Illustration"><span class="ix"></span><span class="opt-t"><span>Illustration</span><small>Custom illustrations &amp; visual assets</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="Creative Direction"><span class="ix"></span><span class="opt-t"><span>Creative Direction</span><small>Visual direction, campaigns &amp; art direction</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="Invitation Design"><span class="ix"></span><span class="opt-t"><span>Invitation Design</span><small>Print and digital invitations, stationery, custom monograms</small></span></label><label class="opt opt-d"><input type="checkbox" name="services" value="Something Else"><span class="ix"></span><span class="opt-t"><span>Something Else</span><small>Have something different in mind?</small></span></label></div></div>
+</section>
+<section class="eq-step grid" data-name="The project" role="group" aria-labelledby="q2" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q2">What would you like to make?</h2><p class="eq-hint">You don't need to know exactly what you need yet. Whatever you already know is a good start.</p></div>
+<div class="eq-a"><textarea class="eq-ta" name="project" rows="6" placeholder="Tell us about the project, the idea, the problem, or whatever you already know."></textarea></div>
+</section>
+<section class="eq-step grid" data-name="Where you are" data-req="one" role="group" aria-labelledby="q3" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q3">Where are you in the process?</h2><p class="eq-hint">Choose the one that fits best.</p></div>
+<div class="eq-a"><div class="opts"><label class="opt"><input type="radio" name="stage" value="Just an idea"><span class="ix"></span><span>Just an idea</span></label><label class="opt"><input type="radio" name="stage" value="Planning the project"><span class="ix"></span><span>Planning the project</span></label><label class="opt"><input type="radio" name="stage" value="Ready to start"><span class="ix"></span><span>Ready to start</span></label><label class="opt"><input type="radio" name="stage" value="Already have an existing brand"><span class="ix"></span><span>Already have an existing brand</span></label><label class="opt"><input type="radio" name="stage" value="Already have a website"><span class="ix"></span><span>Already have a website</span></label><label class="opt"><input type="radio" name="stage" value="Looking for ongoing creative support"><span class="ix"></span><span>Looking for ongoing creative support</span></label><label class="opt"><input type="radio" name="stage" value="Something else"><span class="ix"></span><span>Something else</span></label></div></div>
+</section>
+<section class="eq-step grid" data-name="Timing" data-req="one" role="group" aria-labelledby="q4" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q4">When are you thinking?</h2><p class="eq-hint">A rough idea is fine — nothing is fixed at this point.</p></div>
+<div class="eq-a"><div class="opts"><label class="opt"><input type="radio" name="timeline" value="As soon as possible"><span class="ix"></span><span>As soon as possible</span></label><label class="opt"><input type="radio" name="timeline" value="Within 1 month"><span class="ix"></span><span>Within 1 month</span></label><label class="opt"><input type="radio" name="timeline" value="1–3 months"><span class="ix"></span><span>1–3 months</span></label><label class="opt"><input type="radio" name="timeline" value="3–6 months"><span class="ix"></span><span>3–6 months</span></label><label class="opt"><input type="radio" name="timeline" value="Just exploring for now"><span class="ix"></span><span>Just exploring for now</span></label></div></div>
+</section>
+<section class="eq-step grid" data-name="Your details" data-req="details" role="group" aria-labelledby="q5" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q5">And who are we talking to?</h2><p class="eq-hint">Just enough to reply to you.</p></div>
+<div class="eq-a"><div class="fields">
+<label class="fld"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+<label class="fld"><span>Email</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+<label class="fld"><span>Company / Brand</span><input type="text" name="company" autocomplete="organization"></label>
+<label class="fld"><span>Website / Instagram <em>(optional)</em></span><input type="text" name="website" autocomplete="url"></label>
+</div></div>
+</section>
+<section class="eq-step grid" data-name="Review" role="group" aria-labelledby="q6" hidden>
+<div class="eq-q"><h2 class="eq-h" id="q6">Anything else?</h2><p class="eq-hint">Add a final note if you like, then check everything below before sending.</p></div>
+<div class="eq-a"><textarea class="eq-ta sm" name="note" rows="4" placeholder="Anything else you'd like us to know?"></textarea>
+<div class="sum"><p class="k sum-h">Your enquiry</p><dl class="sum-list"></dl></div></div>
+</section>
+<div class="grid eq-actions"><div class="eq-act"><button type="button" class="lnk eq-back"><span>←</span>Back</button><p class="eq-msg" aria-live="polite"></p><button type="button" class="btn btn-lg eq-next">Continue <span class="arrow">→</span></button></div></div>
+</form>
+<div class="eq-view eq-done" hidden>
+<div class="grid">
+<div class="k" style="grid-column:1/13;color:var(--text-secondary)"><span>Enquiry</span></div>
+<h2 class="eq-h1" tabindex="-1">Thank you.</h2>
+<div class="eq-lede"><p>We've got your enquiry.<br>We're looking forward to hearing more about the project.</p><a class="eq-home" href="index.html">Back to Noir Haus<span class="arrow">→</span></a></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="grid">
+<div class="ft-cta-row">
+<p class="ft-cta-sub" style="color: #FFFFFFBD">You bring the idea.<br>We'll make it make sense.</p>
+</div>
+<a class="ft-cta" href="mailto:hello@thenoirhaus.com">Let's chat<span class="arrow">→</span></a>
+<div class="ft-divider"></div>
+<div class="ft-brand">
+<p class="ft-brand-name">the Noir Haus</p>
+<p class="ft-brand-desc">Independent creative studio creating identities, digital experiences and printed matter.</p>
+<p class="ft-copy">© 2026 Noir Haus</p>
+</div>
+<nav class="ft-group ft-explore">
+<p class="ft-group-label">Explore</p>
+<a href="index.html#work">Work</a><a href="index.html#services">Services</a><a href="Studio.html">Studio</a>
+</nav>
+<nav class="ft-group ft-contact">
+<p class="ft-group-label">Contact</p>
+<a href="mailto:hello@thenoirhaus.com">Email</a><a href="#">Instagram</a><a href="#">LinkedIn</a>
+</nav>
+</div>
+</footer>
+
+<script>
+const __mt=document.querySelector('.menu-toggle');if(__mt)__mt.addEventListener('click',function(){const n=document.querySelector('nav.primary');const open=n.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});document.querySelectorAll('nav.primary a').forEach(a=>a.addEventListener('click',()=>{const n=document.querySelector('nav.primary'),t=document.querySelector('.menu-toggle');if(!n||!n.classList.contains('open'))return;n.classList.remove('open');if(t){t.classList.remove('open');t.setAttribute('aria-expanded','false')}document.body.classList.remove('menu-open')}));
+const __header=document.querySelector('header.site');
+let __lastY=window.scrollY,__navTicking=false;
+function __navScroll(){__navTicking=false;const y=window.scrollY;const delta=y-__lastY;if(y<=8){__header.classList.remove('nav-hidden')}else if(delta>24){__header.classList.add('nav-hidden');__lastY=y}else if(delta<-90){__header.classList.remove('nav-hidden');__lastY=y}}
+window.addEventListener('scroll',()=>{if(!__navTicking){__navTicking=true;requestAnimationFrame(__navScroll)}},{passive:true});
+__navScroll();
+const __st=document.querySelector('.scroll-top');if(__st){__st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));let __stTick=false;function __stCheck(){__stTick=false;__st.classList.toggle('visible',window.scrollY>window.innerHeight*.6)}window.addEventListener('scroll',()=>{if(!__stTick){__stTick=true;requestAnimationFrame(__stCheck)}},{passive:true});__stCheck()}
+</script>
+<button class="scroll-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+<script>
+(function(){
+const $=q=>document.querySelector(q);
+const form=$('#enquiry'),intro=$('.eq-intro'),done=$('.eq-done'),stage=$('.eq'),steps=[...form.querySelectorAll('.eq-step')],N=steps.length;
+const back=$('.eq-back'),next=$('.eq-next'),msg=$('.eq-msg'),cnt=$('.eq-count b'),nm=$('.eq-name'),fill=$('.eq-track i'),list=$('.sum-list');
+let cur=0;
+const show=el=>{el.classList.remove('is-on');el.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('is-on')))};
+const view=v=>{[intro,form,done].forEach(el=>{if(el!==v){el.hidden=true;el.classList.remove('is-on')}});show(v);document.body.classList.toggle('eq-active',v===form)};
+const toTop=()=>{const y=stage.getBoundingClientRect().top+scrollY;if(scrollY>y+4)scrollTo({top:y,behavior:'smooth'})};
+const say=(t,err)=>{msg.textContent=t;msg.classList.toggle('is-err',!!err)};
+function go(i){cur=i;steps.forEach((s,k)=>{if(k!==i){s.hidden=true;s.classList.remove('is-on')}});show(steps[i]);
+cnt.textContent=String(i+1).padStart(2,'0');nm.textContent=steps[i].dataset.name;fill.style.transform='scaleX('+(i+1)/N+')';
+const last=i===N-1;next.innerHTML=(last?'Send enquiry':'Continue')+' <span class="arrow">→</span>';say(last?"We'll get back to you with next steps.":'');if(last)summary();toTop()}
+function check(i){const s=steps[i],r=s.dataset.req;
+if(r==='many'&&!s.querySelector('input:checked'))return 'Choose at least one to continue.';
+if(r==='one'&&!s.querySelector('input:checked'))return 'Choose one to continue.';
+if(r==='details'){if(!form.elements.name.value.trim())return 'Tell us your name.';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.elements.email.value.trim()))return 'Add an email address we can reply to.'}
+return ''}
+function summary(){const fd=new FormData(form),v=k=>(fd.get(k)||'').toString().trim();
+const rows=[['Services',fd.getAll('services').join('\n'),0],['Project',v('project'),1],['Current stage',v('stage'),2],['Timeline',v('timeline'),3],['Name',v('name'),4],['Company / brand',v('company'),4],['Email',v('email'),4],['Website / Instagram',v('website'),4],['Additional note',v('note'),5]];
+list.textContent='';rows.forEach(([l,val,s])=>{if(!val)return;const r=document.createElement('div');r.className='sum-row';const dt=document.createElement('dt');dt.textContent=l;const dd=document.createElement('dd');dd.textContent=val;const b=document.createElement('button');b.type='button';b.className='lnk';b.textContent='Edit';b.addEventListener('click',()=>go(s));r.append(dt,dd,b);list.append(r)})}
+$('.eq-start').addEventListener('click',()=>{view(form);go(0)});
+back.addEventListener('click',()=>{if(cur===0){view(intro);toTop()}else go(cur-1)});
+next.addEventListener('click',()=>{const e=check(cur);if(e){say(e,true);return}if(cur<N-1)go(cur+1);else form.requestSubmit()});
+form.addEventListener('input',e=>{if(msg.classList.contains('is-err'))say('');if(e.target.name==='note')summary()});
+form.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();next.click()}});
+form.addEventListener('submit',async e=>{e.preventDefault();const ep=form.dataset.endpoint;
+if(ep){next.disabled=true;try{const r=await fetch(ep,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!r.ok)throw 0}catch(_){next.disabled=false;say('This didn’t send. Please try again, or email hello@thenoirhaus.com.',true);return}}
+view(done);toTop();const h=done.querySelector('.eq-h1');if(h)h.focus({preventScroll:true})});
+})();
+</script>
+</body>
+</html>
