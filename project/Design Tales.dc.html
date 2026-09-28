@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Tales — The Noir Haus</title>
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/colors.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/typography.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/effects.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg-page);color:var(--text-primary);font-family:var(--font-sans)}
+body{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--space-5);max-width:var(--container-max);width:100%;margin:0 auto;padding:0 60px}
+
+header.site{padding:14px 0;border-bottom:1px solid var(--border-subtle);position:sticky;top:0;background:var(--bg-page);z-index:30;transform:translateY(0);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+header.site.nav-hidden{transform:translateY(-100%)}
+header.site .grid{align-items:center}
+.logo{grid-column:1/5;display:flex;align-items:center}
+.logo img{height:57px;width:auto;display:block}
+nav.primary{grid-column:9/13;display:flex;align-items:center;justify-content:flex-end;gap:40px}
+nav.primary a{position:relative;font-size:13px;font-weight:var(--fw-regular);letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;width:4px;height:4px;margin:0 auto;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a:hover::after,nav.primary a:active::after{opacity:1;transform:scale(1)}
+.nav-cta{border:1px solid var(--border-strong);padding:8px 18px;border-radius:240px;background:var(--noir-950);color:#fff!important;transition:background .5s cubic-bezier(.16,.8,.24,1)}
+.nav-cta::after{display:none}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent);color:#fff!important}
+.menu-toggle{display:none;grid-column:12/13;justify-self:end;width:32px;height:22px;position:relative;background:none;border:none;padding:0;cursor:pointer;z-index:21}
+.menu-toggle span{position:absolute;left:6px;top:10px;width:20px;height:2px;background:var(--text-primary);transition:transform .35s,opacity .35s,background .35s}
+.menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;left:0;height:2px;background:var(--text-primary);transition:transform .35s,width .35s,left .35s}
+.menu-toggle span::before{top:-8px;width:26px;left:-4px}
+.menu-toggle span::after{top:8px;width:16px;left:2px}
+.menu-toggle.open span{background:transparent}
+.menu-toggle.open span::before{top:0;left:-6px;width:24px;transform:rotate(45deg)}
+.menu-toggle.open span::after{top:0;left:-6px;width:24px;transform:rotate(-45deg)}
+.menu-toggle.open span::before,.menu-toggle.open span::after{background:var(--text-primary)}
+
+.scroll-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;background:var(--noir-950);border:1px solid var(--border-strong);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:40;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .4s,transform .4s,background .4s}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--accent);border-color:var(--accent)}
+.scroll-top svg{width:18px;height:18px}
+@media (max-width:640px){.scroll-top{right:16px;bottom:16px;width:44px;height:44px}}
+
+main{flex:1}
+img{display:block;max-width:100%}
+
+/* next project */
+.next-project{padding:var(--space-8) 0 var(--space-9);background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw)}
+.next-inner{grid-column:1/13;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6)}
+.next-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.5)}
+.next-link{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:var(--ls-heading);color:var(--text-on-dark);display:inline-flex;align-items:center;gap:14px;transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover{color:var(--accent)}
+.next-link .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover .arrow{transform:translateX(10px)}
+.next-link{font-size:clamp(1.25rem,2vw,1.75rem)!important;font-weight:var(--fw-regular)}
+.next-link.prev:hover .arrow{transform:translateX(-10px)}
+
+.site-footer{background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw);position:relative;z-index:1;padding:var(--space-9) 0 var(--space-7);overflow:hidden}
+.site-footer .grid{row-gap:0}
+.ft-cta-row{grid-column:1/13;display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6)}
+.ft-cta-sub{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1rem,1.6vw,1.3rem);line-height:1.4;letter-spacing:var(--ls-heading);color:rgba(255,255,255,.55);text-align:right;max-width:32ch}
+.ft-cta{display:flex;align-items:baseline;gap:var(--space-3);width:fit-content;font-family:var(--font-display);font-weight:var(--fw-regular);letter-spacing:var(--ls-heading);font-size:clamp(2.6rem,5.6vw,4.8rem);color:var(--text-on-dark);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta:hover{color:var(--accent)}
+.ft-cta:hover .arrow{transform:translateX(10px)}
+.ft-cta:active{opacity:.8}
+.ft-divider{grid-column:1/13;border-top:1px solid rgba(255,255,255,.14);margin-top:var(--space-8)}
+.ft-brand{grid-column:1/6;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-brand-name{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:var(--fs-h4);letter-spacing:var(--ls-heading);color:var(--text-on-dark)}
+.ft-brand-desc{font-size:13px;line-height:1.6;color:rgba(255,255,255,.55);max-width:38ch}
+.ft-copy{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+.ft-group{grid-column:span 3;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-explore{grid-column:7/10}
+.ft-contact{grid-column:10/13}
+.ft-group-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
+.ft-group a{font-size:13px;color:rgba(255,255,255,.75);transition:color .5s cubic-bezier(.16,.8,.24,1);width:fit-content}
+.ft-group a:hover{color:var(--accent)}
+.ft-br{display:none}
+@media (min-width:1025px){.ft-cta-sub{text-align:left;font-size:45px}.ft-cta{width:488px;height:152px;align-items:center}.ft-brand{gap:20px}.ft-br{display:inline}}
+
+@media (max-width:1024px){
+.grid{gap:var(--space-4)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/6}
+nav.primary{grid-column:6/13;gap:var(--space-5)}
+nav.primary a{font-size:12px}
+.site-footer{padding:var(--space-8) 0 var(--space-6)}
+.ft-cta-row{flex-direction:column;align-items:flex-start;gap:var(--space-4)}
+.ft-cta-sub{text-align:left;max-width:60%;box-sizing:border-box;font-size:32px}
+.ft-cta{width:fit-content;white-space:nowrap;font-size:clamp(40px,8.8vw,88px)}
+.ft-brand{display:contents}
+.ft-brand-name{grid-column:1/13;margin-top:var(--space-6);order:1;font-size:clamp(22px,3.4vw,28px)}
+.ft-brand-desc{grid-column:1/13;order:2}
+.ft-copy{grid-column:1/13;order:5;margin-top:var(--space-6)}
+.ft-group-label{font-size:clamp(11px,1.5vw,13px)}
+.ft-group a{font-size:clamp(15px,2vw,18px)}
+.ft-explore{grid-column:1/7;margin-top:var(--space-6);order:3}
+.ft-contact{grid-column:7/13;margin-top:var(--space-6);order:4}
+.next-inner{flex-direction:row;align-items:center;gap:var(--space-4)}
+}
+@media (max-width:640px){
+.grid{gap:0;padding:0 var(--space-5)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/9}
+.logo img{height:35px}
+.menu-toggle{display:block}
+body.menu-open{overflow:hidden}
+body.menu-open header.site,body.menu-open header.site.nav-hidden{transform:none!important}
+body.menu-open header.site{z-index:25}
+nav.primary{position:fixed;top:0;left:0;right:0;height:66.67vh;z-index:20;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:0;padding:32px;visibility:hidden;opacity:0;transform:translateY(-12px);box-shadow:0 40px 80px -20px rgba(30,30,30,.35);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1),visibility 0s linear .5s}
+nav.primary.open{visibility:visible;opacity:1;transform:translateY(0);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a{color:var(--text-primary);font-size:32px;text-transform:none;letter-spacing:0;font-family:var(--font-display);padding:14px 0;width:100%;border-bottom:1px solid var(--border-subtle);opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary.open a{opacity:1;transform:translateY(0)}
+nav.primary.open a:nth-child(1){transition-delay:.08s}
+nav.primary.open a:nth-child(2){transition-delay:.15s}
+nav.primary.open a:nth-child(3){transition-delay:.22s}
+.nav-cta{margin-top:24px;background:none;border:1px solid var(--border-strong);border-radius:240px;padding:12px 28px;width:auto;text-align:center;font-size:14px!important;color:var(--text-primary)!important}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent)}
+nav.primary a:not(.nav-cta)::after{left:auto;right:0;bottom:auto;top:50%;transform:translateY(-50%) scale(.4);margin:0}
+nav.primary a:not(.nav-cta):hover::after,nav.primary a:not(.nav-cta):active::after{opacity:1;transform:translateY(-50%) scale(1)}
+.next-project{padding:var(--space-6) 0 var(--space-7)}
+.next-link{font-size:clamp(1.6rem,7vw,2.2rem)}
+.site-footer{padding:var(--space-7) 0 var(--space-6)}
+.ft-cta-sub{font-size:20px;max-width:none}
+.ft-divider{margin-top:var(--space-6)}
+.ft-brand{margin-top:var(--space-6);gap:10px}
+.ft-brand-name{font-size:clamp(20px,5vw,24px)}
+.ft-brand-desc{font-size:clamp(13px,3.4vw,14px)}
+.ft-copy{padding-bottom:45px;font-size:11px;margin-top:var(--space-5)}
+.ft-group-label{font-size:11px}
+.ft-group a{font-size:clamp(14px,3.6vw,16px)}
+.ft-explore,.ft-contact{grid-column:1/13;margin-top:var(--space-5)}
+}
+
+
+:root{--dt:#5B1F24;--dt-deep:#48171b;--dt-taupe:#A79A8D;--dt-iv:#F5EFE7;--serif:'Crimson Pro',Georgia,serif;--bleed-l:calc(max(0px,(100vw - var(--container-max))/2) + 60px)}
+main{overflow-x:clip;background:var(--dt-iv);color:var(--dt)}
+.k{display:flex;gap:14px;align-items:baseline;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase}
+img.art{display:block;width:100%;height:auto}
+.full{position:relative;width:100%;overflow:hidden}
+.full>img{width:100%;height:100%;object-fit:cover}
+.dt-h{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.08;letter-spacing:-.01em;text-wrap:pretty}
+.dt-p{font-size:15px;font-weight:300;line-height:1.75;max-width:44ch;text-wrap:pretty}
+.cap{padding:var(--space-5) 0 var(--space-9)}
+.cap .grid{align-items:baseline}
+.cap .k{grid-column:1/6;color:rgba(91,31,36,.78)}
+.cap p{grid-column:7/13;font-size:15px;font-weight:300;line-height:1.75;color:rgba(91,31,36,.82);max-width:46ch}
+.cap.on-dt{background:var(--dt);margin-top:-1px}.cap.on-dt .k,.cap.on-dt p{color:rgba(245,239,231,.8)}
+.hero{background:var(--dt-iv);aspect-ratio:3/2}
+.hero>img{object-position:50% 60%}
+.hero-k{position:absolute;left:0;right:0;top:0;padding-top:var(--space-6);color:var(--dt)}
+.hero-k .k{grid-column:1/13;justify-content:space-between}
+.op{padding:var(--space-8) 0 var(--space-7)}
+.op-logo{grid-column:2/12;margin:calc(-1*var(--space-7)) 0 calc(-1*var(--space-6))}
+.op-row{grid-column:1/13;display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-5);padding-top:var(--space-4);border-top:1px solid rgba(91,31,36,.16)}
+.op-row .dt-sub{font-family:var(--serif);font-size:clamp(1.25rem,2vw,1.75rem)}
+.op-row ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 22px;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(91,31,36,.8)}
+.ov{padding:var(--space-9) 0}
+.ov .k{grid-column:1/4;color:rgba(91,31,36,.78)}
+.ov .dt-h{grid-column:5/13}
+.ov .dt-p{grid-column:5/11;margin-top:var(--space-6);color:rgba(91,31,36,.85)}
+.mn{background:var(--dt);color:var(--dt-iv);padding:var(--space-9) 0 var(--space-7)}
+.mn .grid{align-items:start}
+.mn-txt{grid-column:1/6;display:flex;flex-direction:column;gap:var(--space-5)}
+.mn-txt .k{color:rgba(245,239,231,.72)}.mn-txt .dt-p{color:rgba(245,239,231,.82)}
+.mn-m{grid-column:7/13;justify-self:end;width:min(60%,312px)}
+.lk{grid-column:1/13;margin-top:var(--space-5);padding-top:var(--space-5);border-top:1px solid rgba(245,239,231,.18);display:grid;display:flex;justify-content:space-between;gap:var(--space-6);align-items:flex-end}
+.lk figure.lk-h{align-items:flex-end;text-align:right;flex:0 1 52%}.lk figure.lk-h .b{justify-content:flex-end;width:100%}
+.lk figure{display:flex;flex-direction:column;gap:var(--space-5)}
+.lk .b{height:clamp(90px,11vw,150px);display:flex;align-items:center}
+.lk .b img{height:70%;width:auto;max-width:100%}
+.lk .b img.wa{height:auto;width:70%;max-height:none;transform:translateY(27%)}
+.lk figcaption{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(245,239,231,.66)}
+.pl{aspect-ratio:1672/941;max-height:110vh;background:var(--dt)}
+.ty{padding:var(--space-9) 0 var(--space-8)}
+.ty .k{grid-column:1/4;color:rgba(91,31,36,.78)}
+.ty .dt-h{grid-column:5/13}
+.ty .dt-p{grid-column:5/11;margin-top:var(--space-5);color:rgba(91,31,36,.85)}
+.ty-mq{margin-top:var(--space-8);overflow:hidden;width:100%}.ty-tr{display:flex;width:max-content;animation:tyMq 45s linear infinite}.ty-tr img{height:clamp(320px,44vw,720px);width:auto;max-width:none;flex:none;padding-right:clamp(24px,3vw,48px)}.ty-mq:hover .ty-tr{animation-play-state:paused}@keyframes tyMq{to{transform:translateX(-50%)}}@media (prefers-reduced-motion:reduce){.ty-tr{animation-duration:180s}}
+.bt{background:var(--dt);color:var(--dt-iv);padding:var(--space-9) 0 var(--space-8)}
+.bt .k{grid-column:1/4;color:rgba(245,239,231,.72)}
+.bt .dt-h{grid-column:5/13}
+.bt .dt-p{grid-column:5/11;margin-top:var(--space-5);color:rgba(245,239,231,.82)}
+.pt{aspect-ratio:3/2;max-height:108vh;background:var(--dt);margin-top:-1px}
+.wr{padding:var(--space-9) 0}
+.wr .grid{align-items:end}
+.wr-c{grid-column:1/4;display:flex;flex-direction:column;gap:var(--space-3);font-size:15px;font-weight:300;line-height:1.75;color:rgba(91,31,36,.82)}
+.wr-c .k{color:rgba(91,31,36,.78)}
+.wr-i{grid-column:4/13;margin-right:calc(-1*var(--bleed-l));aspect-ratio:1672/941;overflow:hidden}
+.wr-i img{width:100%;height:100%;object-fit:cover}
+.pk{padding:0 0 var(--space-9)}
+.pk-hd{grid-column:1/13;display:grid;grid-template-columns:subgrid;align-items:baseline;padding-bottom:var(--space-8)}
+.pk-hd .k{grid-column:1/4;color:rgba(91,31,36,.78)}.pk-hd .dt-h{grid-column:5/13}
+.pk-env,.pk-tag{min-width:0}
+.pk-env img,.pk-tag img{width:100%;height:auto;object-fit:cover}
+.pk-env img{aspect-ratio:3/2}.pk-tag img{aspect-ratio:1}
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(110px,14vw,180px);z-index:1;pointer-events:none;background:transparent;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(to bottom,#000 45%,transparent);mask-image:linear-gradient(to bottom,#000 45%,transparent)}
+.hero-k{z-index:2;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.45),0 0 14px rgba(0,0,0,.35)}
+.pk-row{grid-column:1/13;display:grid;grid-template-columns:3fr 2fr;gap:var(--space-5);align-items:start;margin:0 calc(-1*var(--bleed-l))}.pk-env .pk-cap{padding-left:var(--bleed-l)}.pk-tag .pk-cap{padding-right:var(--bleed-l);text-align:right}
+.pk-cap{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(91,31,36,.72);margin-top:var(--space-3)}
+.pk-dt{grid-column:1/13;display:grid;grid-template-columns:subgrid;margin-top:var(--space-9);align-items:center}
+.sl{grid-column:2/7;aspect-ratio:1;overflow:hidden}
+.sl img{width:100%;height:100%;object-fit:cover;object-position:45% 81%;transform:scale(2.4);transform-origin:45% 81%}
+.sl-t{grid-column:8/12;display:flex;flex-direction:column;gap:var(--space-4)}
+.sl-t .k{color:rgba(91,31,36,.78)}.sl-t .dt-p{color:rgba(91,31,36,.85)}
+.sl-t .dt-h{font-size:clamp(1.6rem,2.6vw,2.4rem)}
+.bw{aspect-ratio:3/2;max-height:112vh;background:var(--dt)}
+.bw>img{object-position:50% 40%}
+.dl{padding:var(--space-9) 0}
+.dl .grid{align-items:start}
+.dl-hd{grid-column:1/13;display:grid;grid-template-columns:subgrid;align-items:baseline;padding-bottom:var(--space-8)}
+.dl-hd .k{grid-column:1/4;color:rgba(91,31,36,.78)}
+.dl-hd .dt-h{grid-column:5/13;font-size:clamp(1.6rem,2.6vw,2.4rem)}
+.dl-row{grid-column:1/13;display:grid;grid-template-columns:4fr 5fr 4fr;gap:var(--space-5);align-items:start}.dl-row figure{min-width:0}
+.dl-a .im,.dl-c .im{aspect-ratio:4/5;overflow:hidden}.dl-b .im{aspect-ratio:1;overflow:hidden}
+.dl .im img{width:100%;height:100%;object-fit:cover}
+.cl{background:var(--dt-deep) url(assets/designtales/silk.jpg) center/cover no-repeat;min-height:min(92vh,62vw);display:flex;align-items:center;justify-content:center;padding:var(--space-9) var(--space-5)}
+.cl img{width:min(600px,72vw);height:auto}
+.cz{padding:var(--space-9) 0 var(--space-8)}
+.cz-m{grid-column:1/3}
+.cz-p{grid-column:5/13;font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.15;color:var(--dt)}
+.cz-meta{grid-column:1/13;margin-top:var(--space-8);padding-top:var(--space-5);border-top:1px solid rgba(91,31,36,.16);display:flex;gap:24px;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(91,31,36,.72)}
+.cz-meta strong{color:var(--dt);font-weight:var(--fw-regular)}
+@media (max-width:1024px){
+.ov .dt-h,.ty .dt-h,.bt .dt-h,.pk-hd .dt-h,.dl-hd .dt-h{grid-column:1/13;margin-top:var(--space-4)}
+.ov .k,.ty .k,.bt .k,.pk-hd .k,.dl-hd .k{grid-column:1/13}
+.ov .dt-p,.ty .dt-p,.bt .dt-p{grid-column:1/11}
+.op-logo{grid-column:1/13}
+.op-row{flex-direction:column;gap:var(--space-3)}.op-row ul{justify-content:flex-start}
+.mn-txt{grid-column:1/13}.mn-m{grid-column:1/13;margin-top:var(--space-7);width:min(42%,252px)}
+.wr-c{grid-column:1/13;order:2;margin-top:var(--space-5)}.wr-i{grid-column:1/13;margin-left:calc(-1*var(--bleed-l))}
+.sl{grid-column:1/7}.sl-t{grid-column:8/13}
+.cz-m{grid-column:1/4}.cz-p{grid-column:1/13;margin-top:var(--space-6)}
+}
+@media (max-width:640px){
+:root{--bleed-l:var(--space-5)}
+.next-project{padding:var(--space-5) 0 var(--space-6)}
+.next-inner{gap:var(--space-3)}
+.next-link{font-size:15px!important;gap:8px;white-space:nowrap;min-height:44px}
+.next-link:hover .arrow{transform:translateX(4px)}.next-link.prev:hover .arrow{transform:translateX(-4px)}
+.cap{padding:var(--space-4) 0 var(--space-8)}
+.cap .k,.cap p{grid-column:1/13}.cap p{margin-top:var(--space-3)}
+.hero{aspect-ratio:1/1;max-height:none}.hero>img{object-position:30% 60%}
+.op{padding:var(--space-7) 0 var(--space-6)}.op-logo{margin:calc(-1*var(--space-5)) -6% calc(-1*var(--space-4));width:112%}
+.ov,.ty,.bt,.mn,.wr,.dl{padding-top:var(--space-8);padding-bottom:var(--space-8)}
+.ov .dt-p,.ty .dt-p,.bt .dt-p{grid-column:1/13}
+.lk{grid-template-columns:1fr 1fr;gap:var(--space-6) var(--space-5);margin-top:var(--space-5)}
+.lk{flex-direction:column;align-items:flex-start}.lk figure.lk-h{align-items:flex-start;text-align:left;flex:none;width:100%}.lk figure.lk-h .b{justify-content:flex-start}
+.lk .b{height:80px}
+.pl{aspect-ratio:4/5;max-height:none}.pl>img{object-position:50% 50%}
+.ty-mq{margin-top:var(--space-6)}.ty-tr img{height:78vw}.ty-tr{animation-duration:30s}
+.pt{aspect-ratio:1;max-height:none}
+.wr-i{aspect-ratio:1;margin-right:calc(-1*var(--bleed-l))}
+.pk{padding-bottom:var(--space-8)}
+.pk-row{grid-template-columns:1fr}.pk-tag .pk-cap{text-align:left;padding-left:var(--bleed-l)}.pk-row>div+div{margin-top:var(--space-6)}
+.pk-tag img{aspect-ratio:4/5}
+.pk-dt{margin-top:var(--space-8)}.sl,.sl-t{grid-column:1/13}.sl-t{margin-top:var(--space-5)}
+.bw{aspect-ratio:4/5;max-height:none}.bw>img{object-position:62% 50%}
+.dl-row{grid-template-columns:1fr;gap:var(--space-6)}
+.cl{min-height:110vw}
+.cz{padding:var(--space-8) 0 var(--space-7)}.cz-m{grid-column:1/5}.cz-meta{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<header class="site">
+<div class="grid">
+<a class="logo" href="index.html" aria-label="The Noir Haus" style="height:45px"><img src="./asset-1-3000-msk4z5c7-dc0f.png" alt="The Noir Haus" style="width:56px;height:43px"></a>
+<button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+<nav class="primary">
+<a href="index.html#work">Work</a>
+<a href="Studio.html">Studio</a>
+<a class="nav-cta" href="Enquire.dc.html">Enquiries</a>
+</nav>
+</div>
+</header>
+<main>
+<figure class="full hero" data-screen-label="Hero"><img src="assets/designtales/box-set.jpg" alt="Design Tales box, tissue, monogram seal, shopping bag and swing tag"><figcaption class="hero-k"><div class="grid"><div class="k"><span>Brand Identity / Fashion &amp; Lifestyle</span><span>03 / 05</span></div></div></figcaption></figure>
+<section class="op" data-screen-label="Opening">
+<div class="grid">
+<h1 class="op-logo" aria-label="Design Tales by Hinal Bangera"><img class="art" src="assets/designtales/logo.png" alt=""></h1>
+<div class="op-row"><span class="dt-sub">A fashion and lifestyle identity</span><ul><li>Brand Identity</li><li>Visual Identity</li><li>Packaging</li><li>Print</li></ul></div>
+</div>
+</section>
+<section class="ov" data-screen-label="Overview">
+<div class="grid">
+<span class="k"><span>01 &nbsp;Overview</span></span>
+<p class="dt-h">An identity that reaches past the logo - into cloth, paper and the way things are wrapped.</p>
+<p class="dt-p">Design Tales by Hinal Bangera pairs a classical serif with a flowing script, adds a DT monogram and a botanical line drawing, and carries them in burgundy, taupe and ivory across garments, packaging and print.</p>
+</div>
+</section>
+<section class="mn" data-screen-label="Identity">
+<div class="grid">
+<div class="mn-txt">
+<span class="k"><span>02 &nbsp;Identity</span></span>
+<p class="dt-h">Primary Logo</p>
+<p class="dt-p">The wordmark sets the name in serif capitals, signed below in script. The monogram - a serif D crossed by a single script stroke - carries the brand where the full name won't fit.</p>
+</div>
+<img class="mn-m" src="assets/designtales/white-b.png" alt="Design Tales primary logo">
+<div class="lk">
+<figure><div class="b"><img src="assets/designtales/white-c.png" alt="Design Tales monogram"></div><figcaption>Monogram</figcaption></figure>
+<figure class="lk-h"><div class="b"><img class="wa" src="assets/designtales/white-a.png" alt="Design Tales horizontal logo"></div><figcaption>Horizontal</figcaption></figure>
+</div>
+</div>
+</section>
+<figure class="full pl" data-screen-label="Colour"><img src="assets/designtales/palette.jpg" alt="Burgundy, vintage taupe and ivory swatches among linen, paper and stone"></figure>
+<section class="cap"><div class="grid"><div class="k"><span>03</span><span>Colour</span></div><p>Burgundy #5B1F24, vintage taupe #A79A8D and ivory #F5EFE7 - shown with the linen, paper and stone they sit beside.</p></div></section>
+<section class="ty" data-screen-label="Typography">
+<div class="grid">
+<span class="k"><span>04 &nbsp;Typography</span></span>
+</div>
+<div class="ty-mq"><div class="ty-tr"><img src="assets/designtales/type.png" alt="Typography specimen: Minion Variable Concept and Leander Script Pro"><img src="assets/designtales/type.png" alt="" aria-hidden="true"><img src="assets/designtales/type.png" alt="" aria-hidden="true"><img src="assets/designtales/type.png" alt="" aria-hidden="true"></div></div>
+</section>
+<section class="bt" data-screen-label="Botanical">
+<div class="grid">
+<span class="k"><span>05 &nbsp;Botanical language</span></span>
+<p class="dt-h">A single leaf, drawn in fine line and left to run.</p>
+<p class="dt-p">The linework repeats as an all-over surface - on tissue, envelope liners, box lids and the backs of swing tags.</p>
+</div>
+</section>
+<figure class="full pt"><img src="assets/designtales/pattern.jpg" alt="Design Tales botanical line pattern on burgundy"></figure>
+<section class="wr">
+<div class="grid">
+<div class="wr-c"><span class="k"><span>Wrapping</span></span><p>Ivory tissue in burgundy line, closed with a burgundy card.</p></div>
+<div class="wr-i"><img src="assets/designtales/wrap.jpg" alt="Botanical wrapping paper with a burgundy Design Tales card"></div>
+</div>
+</section>
+<section class="pk" data-screen-label="Packaging">
+<div class="grid">
+<div class="pk-hd"><span class="k"><span>06 &nbsp;Packaging</span></span><p class="dt-h">Ivory stock, burgundy ribbon, the leaf inside.</p></div>
+<div class="pk-row">
+<div class="pk-env"><img src="assets/designtales/envelope.jpg" alt="Ivory envelope with botanical burgundy liner"><p class="pk-cap">Envelope and liner</p></div>
+<div class="pk-tag"><img src="assets/designtales/tags.jpg" alt="Ivory and burgundy swing tags"><p class="pk-cap">Swing tags, front and back</p></div>
+</div>
+</div>
+</section>
+<figure class="full bw" data-screen-label="Brand world"><img src="assets/designtales/bag.jpg" alt="Design Tales shopping bag carried with burgundy and ivory linen"></figure>
+<section class="dl" data-screen-label="Details">
+<div class="grid">
+<div class="dl-hd"><span class="k"><span>08 &nbsp;Details</span></span><p class="dt-h">Close to the cloth.</p></div>
+<div class="dl-row"><figure class="dl-a"><div class="im"><img src="assets/designtales/neck-label.jpg" alt="Woven neck label on natural linen"></div><figcaption class="pk-cap">Neck label</figcaption></figure>
+<figure class="dl-b"><div class="im"><img src="assets/designtales/woven-label.jpg" alt="Woven monogram label on knit"></div><figcaption class="pk-cap">Monogram label</figcaption></figure><figure class="dl-c"><div class="im"><img src="assets/designtales/hanger.jpg" alt="Burgundy velvet hanger with DT monogram on a brass rail"></div><figcaption class="pk-cap">Studio details</figcaption></figure></div>
+</div>
+</section>
+<section class="cl" data-screen-label="Closing"><img src="assets/designtales/white-b.png" alt="Design Tales by Hinal Bangera"></section>
+<section class="cz">
+<div class="grid">
+<div class="cz-m"><img class="art" src="assets/designtales/monogram.png" alt="Design Tales monogram"></div>
+<p class="cz-p">A refined identity shaped by timeless typography, botanical detail, and tactile craft.</p>
+<div class="cz-meta"><strong>Design Tales</strong><span>Brand Identity</span><span>Fashion &amp; Lifestyle</span></div>
+</div>
+</section>
+</main>
+<section class="next-project">
+<div class="grid">
+<div class="next-inner">
+<a class="next-link prev" href="AATOM - Project Page.dc.html"><span class="arrow">←</span>Previous Project</a>
+<a class="next-link" href="index.html#work">Next Project<span class="arrow">→</span></a>
+</div>
+</div>
+</section>
+<footer class="site-footer">
+<div class="grid">
+<div class="ft-cta-row">
+<p class="ft-cta-sub" style="color: #FFFFFFBD">You bring the idea.<br>We'll make it make sense.</p>
+</div>
+<a class="ft-cta" href="mailto:hello@thenoirhaus.com">Let's chat<span class="arrow">→</span></a>
+<div class="ft-divider"></div>
+<div class="ft-brand">
+<p class="ft-brand-name">the Noir Haus</p>
+<p class="ft-brand-desc">Independent creative studio creating identities, digital experiences and printed matter.</p>
+<p class="ft-copy">© 2026 Noir Haus</p>
+</div>
+<nav class="ft-group ft-explore">
+<p class="ft-group-label">Explore</p>
+<a href="index.html#work">Work</a><a href="index.html#services">Services</a><a href="Studio.html">Studio</a>
+</nav>
+<nav class="ft-group ft-contact">
+<p class="ft-group-label">Contact</p>
+<a href="mailto:hello@thenoirhaus.com">Email</a><a href="#">Instagram</a><a href="#">LinkedIn</a>
+</nav>
+</div>
+</footer>
+
+<script>
+const __mt=document.querySelector('.menu-toggle');if(__mt)__mt.addEventListener('click',function(){const n=document.querySelector('nav.primary');const open=n.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});document.querySelectorAll('nav.primary a').forEach(a=>a.addEventListener('click',()=>{const n=document.querySelector('nav.primary'),t=document.querySelector('.menu-toggle');if(!n||!n.classList.contains('open'))return;n.classList.remove('open');if(t){t.classList.remove('open');t.setAttribute('aria-expanded','false')}document.body.classList.remove('menu-open')}));
+const __header=document.querySelector('header.site');
+let __lastY=window.scrollY,__navTicking=false;
+function __navScroll(){__navTicking=false;const y=window.scrollY;const delta=y-__lastY;if(y<=8){__header.classList.remove('nav-hidden')}else if(delta>24){__header.classList.add('nav-hidden');__lastY=y}else if(delta<-90){__header.classList.remove('nav-hidden');__lastY=y}}
+window.addEventListener('scroll',()=>{if(!__navTicking){__navTicking=true;requestAnimationFrame(__navScroll)}},{passive:true});
+__navScroll();
+const __st=document.querySelector('.scroll-top');if(__st){__st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));let __stTick=false;function __stCheck(){__stTick=false;__st.classList.toggle('visible',window.scrollY>window.innerHeight*.6)}window.addEventListener('scroll',()=>{if(!__stTick){__stTick=true;requestAnimationFrame(__stCheck)}},{passive:true});__stCheck()}
+</script>
+<button class="scroll-top" aria-label="Scroll to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+</body>
+</html>
