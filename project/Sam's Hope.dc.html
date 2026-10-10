@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sam's Hope - The Noir Haus</title>
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/colors.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/typography.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/the-noir-haus-design-system-ba36cd91-7f9a-45d4-92bb-fae37fb37674/tokens/effects.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600&family=Work+Sans:wght@300;400&display=swap"><style>@font-face{font-family:"SH Clash";src:url("//cdn.fontshare.com/wf/O462VY6O6FTQCS72XVMTQHXAM4NN5CY3/TWF57ITZORMJ3MEWLQQIVO6BMXIB6FUR/MJQFMMOTEGNXDVM7HBBDTQHTVB2M7Y6G.woff2") format("woff2");font-weight:400;font-display:swap}@font-face{font-family:"SH Clash";src:url("//cdn.fontshare.com/wf/2SAK53YLUN7RMYJU4MYLSBV6SSSJEJZB/RXS4DPGJRKOUFZMF5X5BVUGNNKJT65XZ/DJS4RYGIUYUXJQOHY5VCZPKSTXUSHTSP.woff2") format("woff2");font-weight:500;font-display:swap}.scroll-top .st-ring{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none;overflow:visible}.st-ring circle{fill:none;stroke-width:1.5}.st-t{stroke:rgba(255,255,255,.16)}.st-p{stroke:rgba(255,255,255,.85);stroke-linecap:round;stroke-dasharray:146.08;stroke-dashoffset:146.08;transition:stroke-dashoffset .2s linear}.scroll-top:hover .st-p{stroke:#fff}@media (prefers-reduced-motion:reduce){.st-p{transition:none}}
+.ft-divider-b{margin-top:var(--space-7)}.ft-copy{grid-column:1/13;margin-top:var(--space-5)}
+@media (max-width:1024px){.ft-divider-b{order:5;margin-top:var(--space-6)}.ft-copy{order:6;margin-top:var(--space-5)}}
+</style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg-page);color:var(--text-primary);font-family:var(--font-sans)}
+body{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--space-5);max-width:var(--container-max);width:100%;margin:0 auto;padding:0 60px}
+
+header.site{padding:14px 0;border-bottom:1px solid var(--border-subtle);position:sticky;top:0;background:var(--bg-page);z-index:30;transform:translateY(0);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+header.site.nav-hidden{transform:translateY(-100%)}
+header.site .grid{align-items:center}
+.logo{grid-column:1/5;display:flex;align-items:center}
+.logo img{height:57px;width:auto;display:block}
+nav.primary{grid-column:9/13;display:flex;align-items:center;justify-content:flex-end;gap:40px}
+nav.primary a{position:relative;font-size:13px;font-weight:var(--fw-regular);letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-secondary);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;width:4px;height:4px;margin:0 auto;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a:hover::after,nav.primary a:active::after{opacity:1;transform:scale(1)}
+.nav-cta{border:1px solid var(--border-strong);padding:8px 18px;border-radius:240px;background:var(--noir-950);color:#fff!important;transition:background .5s cubic-bezier(.16,.8,.24,1)}
+.nav-cta::after{display:none}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent);color:#fff!important}
+.menu-toggle{display:none;grid-column:12/13;justify-self:end;width:32px;height:22px;position:relative;background:none;border:none;padding:0;cursor:pointer;z-index:21}
+.menu-toggle span{position:absolute;left:6px;top:10px;width:20px;height:2px;background:var(--text-primary);transition:transform .35s,opacity .35s,background .35s}
+.menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;left:0;height:2px;background:var(--text-primary);transition:transform .35s,width .35s,left .35s}
+.menu-toggle span::before{top:-8px;width:26px;left:-4px}
+.menu-toggle span::after{top:8px;width:16px;left:2px}
+.menu-toggle.open span{background:transparent}
+.menu-toggle.open span::before{top:0;left:-6px;width:24px;transform:rotate(45deg)}
+.menu-toggle.open span::after{top:0;left:-6px;width:24px;transform:rotate(-45deg)}
+.menu-toggle.open span::before,.menu-toggle.open span::after{background:var(--text-primary)}
+
+.scroll-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;background:var(--noir-950);border:1px solid var(--border-strong);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:40;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .4s,transform .4s,background .4s}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--accent);border-color:var(--accent)}
+.scroll-top svg{width:18px;height:18px}
+@media (max-width:640px){.scroll-top{right:16px;bottom:16px;width:44px;height:44px}}
+
+main{flex:1}
+img{display:block;max-width:100%}
+
+/* next project */
+.next-project{padding:var(--space-8) 0 var(--space-9);background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw)}
+.next-inner{grid-column:1/13;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6)}
+.next-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.5)}
+.next-link{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:var(--ls-heading);color:var(--text-on-dark);display:inline-flex;align-items:center;gap:14px;transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover{color:var(--accent)}
+.next-link .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.next-link:hover .arrow{transform:translateX(10px)}
+.next-link{font-size:clamp(1.25rem,2vw,1.75rem)!important;font-weight:var(--fw-regular)}
+.next-link.prev:hover .arrow{transform:translateX(-10px)}
+
+.site-footer{background:var(--bg-inverse);width:100vw;margin-left:calc(50% - 50vw);position:relative;z-index:1;padding:var(--space-9) 0 var(--space-7);overflow:hidden}
+.site-footer .grid{row-gap:0}
+.ft-cta-row{grid-column:1/13;display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6)}
+.ft-cta-sub{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:clamp(1rem,1.6vw,1.3rem);line-height:1.4;letter-spacing:var(--ls-heading);color:rgba(255,255,255,.55);text-align:right;max-width:32ch}
+.ft-cta{display:flex;align-items:baseline;gap:var(--space-3);width:fit-content;font-family:var(--font-display);font-weight:var(--fw-regular);letter-spacing:var(--ls-heading);font-size:clamp(2.6rem,5.6vw,4.8rem);color:var(--text-on-dark);transition:color .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}
+.ft-cta:hover{color:var(--accent)}
+.ft-cta:hover .arrow{transform:translateX(10px)}
+.ft-cta:active{opacity:.8}
+.ft-divider{grid-column:1/13;border-top:1px solid rgba(255,255,255,.14);margin-top:var(--space-8)}
+.ft-brand{grid-column:1/6;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-brand-name{font-family:var(--font-display);font-weight:var(--fw-regular);font-size:var(--fs-h4);letter-spacing:var(--ls-heading);color:var(--text-on-dark)}
+.ft-brand-desc{font-size:13px;line-height:1.6;color:rgba(255,255,255,.55);max-width:38ch}
+.ft-copy{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+.ft-group{grid-column:span 3;margin-top:var(--space-7);display:flex;flex-direction:column;gap:12px}
+.ft-explore{grid-column:7/10}
+.ft-contact{grid-column:10/13}
+.ft-group-label{font-size:10px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
+.ft-group a{font-size:13px;color:rgba(255,255,255,.75);transition:color .5s cubic-bezier(.16,.8,.24,1);width:fit-content}
+.ft-group a:hover{color:var(--accent)}
+.ft-br{display:none}
+@media (min-width:1025px){.ft-cta-sub{text-align:left;font-size:45px}.ft-cta{width:488px;height:152px;align-items:center}.ft-brand{gap:20px}.ft-br{display:inline}}
+
+@media (max-width:1024px){
+.grid{gap:var(--space-4)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/6}
+nav.primary{grid-column:6/13;gap:var(--space-5)}
+nav.primary a{font-size:12px}
+.site-footer{padding:var(--space-8) 0 var(--space-6)}
+.ft-cta-row{flex-direction:column;align-items:flex-start;gap:var(--space-4)}
+.ft-cta-sub{text-align:left;max-width:60%;box-sizing:border-box;font-size:32px}
+.ft-cta{width:fit-content;white-space:nowrap;font-size:clamp(40px,8.8vw,88px)}
+.ft-brand{display:contents}
+.ft-brand-name{grid-column:1/13;margin-top:var(--space-6);order:1;font-size:clamp(22px,3.4vw,28px)}
+.ft-brand-desc{grid-column:1/13;order:2}
+.ft-copy{grid-column:1/13;order:5;margin-top:var(--space-6)}
+.ft-group-label{font-size:clamp(11px,1.5vw,13px)}
+.ft-group a{font-size:clamp(15px,2vw,18px)}
+.ft-explore{grid-column:1/7;margin-top:var(--space-6);order:3}
+.ft-contact{grid-column:7/13;margin-top:var(--space-6);order:4}
+.next-inner{flex-direction:row;align-items:center;gap:var(--space-4)}
+}
+@media (max-width:640px){
+.grid{gap:0;padding:0 var(--space-5)}
+header.site{padding:var(--space-5) 0}
+.logo{grid-column:1/9}
+.logo img{height:35px}
+.menu-toggle{display:block}
+body.menu-open{overflow:hidden}
+body.menu-open header.site,body.menu-open header.site.nav-hidden{transform:none!important}
+body.menu-open header.site{z-index:25}
+nav.primary{position:fixed;top:0;left:0;right:0;height:66.67vh;z-index:20;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:0;padding:32px;visibility:hidden;opacity:0;transform:translateY(-12px);box-shadow:0 40px 80px -20px rgba(30,30,30,.35);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1),visibility 0s linear .5s}
+nav.primary.open{visibility:visible;opacity:1;transform:translateY(0);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary a{color:var(--text-primary);font-size:32px;text-transform:none;letter-spacing:0;font-family:var(--font-display);padding:14px 0;width:100%;border-bottom:1px solid var(--border-subtle);opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.16,.8,.24,1),transform .5s cubic-bezier(.16,.8,.24,1)}
+nav.primary.open a{opacity:1;transform:translateY(0)}
+nav.primary.open a:nth-child(1){transition-delay:.08s}
+nav.primary.open a:nth-child(2){transition-delay:.15s}
+nav.primary.open a:nth-child(3){transition-delay:.22s}
+.nav-cta{margin-top:24px;background:none;border:1px solid var(--border-strong);border-radius:240px;padding:12px 28px;width:auto;text-align:center;font-size:14px!important;color:var(--text-primary)!important}
+.nav-cta:hover,.nav-cta:active{background:var(--accent);border-color:var(--accent)}
+nav.primary a:not(.nav-cta)::after{left:auto;right:0;bottom:auto;top:50%;transform:translateY(-50%) scale(.4);margin:0}
+nav.primary a:not(.nav-cta):hover::after,nav.primary a:not(.nav-cta):active::after{opacity:1;transform:translateY(-50%) scale(1)}
+.next-project{padding:var(--space-6) 0 var(--space-7)}
+.next-link{font-size:clamp(1.6rem,7vw,2.2rem)}
+.site-footer{padding:var(--space-7) 0 var(--space-6)}
+.ft-cta-sub{font-size:20px;max-width:none}
+.ft-divider{margin-top:var(--space-6)}
+.ft-brand{margin-top:var(--space-6);gap:10px}
+.ft-brand-name{font-size:clamp(20px,5vw,24px)}
+.ft-brand-desc{font-size:clamp(13px,3.4vw,14px)}
+.ft-copy{padding-bottom:45px;font-size:11px;margin-top:var(--space-5)}
+.ft-group-label{font-size:11px}
+.ft-group a{font-size:clamp(14px,3.6vw,16px)}
+.ft-explore,.ft-contact{grid-column:1/13;margin-top:var(--space-5)}
+}
+
+
+
+:root{--sh:#1B3B6F;--sh-deep:#142E58;--sh-y:#F9B83B;--sh-bg:#F5F7FB;--slab:"SH Clash",var(--font-display);--bleed-l:calc(max(0px,(100vw - var(--container-max))/2) + 60px)}
+main{overflow-x:clip;background:var(--sh-bg);color:var(--sh)}
+.k{display:flex;gap:14px;align-items:baseline;font-weight:500;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase}
+.full{position:relative;width:100%;overflow:hidden}.full>img{width:100%;height:100%;object-fit:cover}
+.sh-h{font-family:var(--slab);font-weight:400;font-size:clamp(1.8rem,3vw,2.7rem);line-height:1.15;letter-spacing:-.02em;text-wrap:pretty}
+.sh-p{font-size:15px;font-weight:400;line-height:1.75;max-width:46ch;text-wrap:pretty}
+.sec{padding:var(--space-9) 0}
+.hd{grid-column:1/13;display:grid;grid-template-columns:subgrid;align-items:baseline}
+.hd .k{grid-column:1/4;color:rgba(27,59,111,.78)}
+.hd .sh-h{grid-column:5/13}
+.hd .sh-p{grid-column:5/11;margin-top:var(--space-5);color:rgba(27,59,111,.86)}
+.dark{background:var(--sh);color:#fff}
+.dark .hd .k,.dark .cp{color:rgba(255,255,255,.7)}.dark .hd .sh-p{color:rgba(255,255,255,.84)}
+.dark .k .n{color:var(--sh-y)}.k .n{font-weight:400}
+.cp{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.72);margin-top:var(--space-3);line-height:1.6}
+.cp.nt{text-transform:none;letter-spacing:0;font-size:14px;font-weight:400;max-width:60ch}
+.blk{grid-column:1/13;margin-top:var(--space-8);min-width:0}
+.blk img{width:100%;height:auto}
+.panel{background:#fff;padding:clamp(16px,3vw,48px);border:1px solid rgba(27,59,111,.08)}
+.bleed{margin-left:calc(-1*var(--bleed-l));margin-right:calc(-1*var(--bleed-l))}
+.bleed .cp{padding:0 var(--bleed-l);text-align:center}
+.eq{display:flex;gap:var(--space-5);align-items:flex-start}.eq>figure{min-width:0}
+.eq img{width:100%;height:auto;border-radius:var(--radius-lg)}.pe{gap:15px}.pe .cp{padding:0 var(--bleed-l)}
+.pl{position:relative;height:1.4em;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.8);font-weight:500;grid-column:1/13;margin-left:calc(-1*var(--bleed-l));margin-right:calc(-1*var(--bleed-l))}.pl span{position:absolute;top:0;white-space:nowrap}
+@property --r{syntax:"<length>";inherits:false;initial-value:0px}
+.xr{position:relative;width:100%;overflow:hidden;background:#fff;cursor:crosshair;--r:0px;--x:50%;--y:50%;transition:--r .45s cubic-bezier(.4,0,.2,1);touch-action:pan-y}.xr.on{--r:clamp(110px,13vw,190px)}.xr.rd{border-radius:var(--radius-lg)}.xr img{position:absolute;left:0;top:0;width:100%;display:block}.xr .xf{height:100%;object-fit:cover}.xr .xw{height:auto;background:#fff;-webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent calc(var(--r) - 1px),#000 var(--r));mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent calc(var(--r) - 1px),#000 var(--r))}.xr.rd .xw{height:100%;object-fit:contain;object-position:top center}
+.zm{overflow:hidden;cursor:zoom-in}.zm img{transition:transform .25s cubic-bezier(.4,0,.2,1);will-change:transform}@media (hover:none){.zm{cursor:auto}}
+.hero{aspect-ratio:3/2;max-height:100vh;background:#1e1e1e}.hero>img{object-position:50% 55%}
+.hero-k{position:absolute;left:0;right:0;top:0;padding-top:var(--space-6);z-index:2;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45),0 0 14px rgba(0,0,0,.35)}
+.hero-k .k{grid-column:1/13;justify-content:space-between}
+.op{padding:var(--space-8) 0 var(--space-7)}
+.op h1{grid-column:1/13;font-family:var(--slab);font-weight:400;font-size:clamp(3.4rem,9vw,8rem);line-height:.95;letter-spacing:-.035em;color:var(--sh);margin-bottom:var(--space-7)}
+.op-row{grid-column:1/13;display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-5);padding-top:var(--space-4);border-top:1px solid rgba(27,59,111,.16)}
+.op-row .sub{font-family:var(--font-sans);font-weight:400;font-size:clamp(1rem,1.4vw,1.2rem);letter-spacing:0}
+.op-row ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 22px;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.8)}
+.ov{padding-top:var(--space-8)}
+.q{grid-column:5/13;margin-top:var(--space-8);padding-top:var(--space-5);border-top:1px solid rgba(27,59,111,.16)}
+.q p{font-family:var(--font-sans);font-weight:400;font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.6;max-width:38ch;text-wrap:pretty}
+.flow{grid-column:5/13;margin-top:var(--space-7);display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font-size:12px;letter-spacing:var(--ls-wide);text-transform:uppercase}
+.flow span.s{padding:8px 14px;border:1px solid rgba(27,59,111,.3);border-radius:var(--radius-lg)}
+.flow span.a{color:rgba(27,59,111,.45)}
+.flow-l{grid-column:5/13;margin-top:var(--space-8)}
+.pair{grid-column:1/13;margin-top:var(--space-8);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+.pair figure{min-width:0}.pair img{width:100%;height:auto}
+.ph img{aspect-ratio:3/4;object-fit:cover}
+.stats{grid-column:5/13;margin-top:var(--space-8);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5);border-top:1px solid rgba(27,59,111,.16);padding-top:var(--space-5)}
+.stats b{display:block;font-family:var(--slab);font-weight:400;font-size:clamp(2rem,3.6vw,3.2rem);line-height:1;letter-spacing:-.03em}
+.stats span{display:block;margin-top:var(--space-3);font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.72)}
+.nav4{grid-column:5/13;margin-top:var(--space-7);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(27,59,111,.16)}
+.nav4 li{list-style:none;padding:var(--space-4) var(--space-3) 0 0;font-family:var(--slab);font-weight:400;font-size:clamp(1rem,1.5vw,1.3rem);letter-spacing:-.01em}
+.nav4 li small{display:block;font-family:var(--font-sans);font-size:11px;letter-spacing:var(--ls-wide);color:rgba(27,59,111,.6);margin-bottom:6px}
+.sk{grid-column:1/13;margin-top:var(--space-8);display:grid;grid-template-columns:subgrid;align-items:end}
+.sk-c{grid-column:1/4;display:flex;flex-direction:column;gap:var(--space-3)}
+.sk-c ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-family:var(--font-sans);font-weight:400;font-size:15px}
+.sk-i{grid-column:5/13}.sk-i img{width:60%;height:auto}
+.scr3{grid-column:1/13;margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
+.scr4{grid-column:1/13;margin-top:var(--space-8);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
+.scr3 figure,.scr4 figure{min-width:0}
+.scr{position:relative;aspect-ratio:3/4;overflow:hidden;background:#fff;container-type:size}
+.scr img{display:block;width:100%;height:auto;transition:transform 5s cubic-bezier(.4,0,.2,1)}
+@media (hover:hover){.scr:hover img{transform:translateY(calc(-100% + 100cqh))}}
+@media (hover:none){.scr{overflow-y:auto;-webkit-overflow-scrolling:touch}}
+.sg{grid-column:5/13;margin-top:var(--space-8);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);border-top:1px solid rgba(27,59,111,.16);padding-top:var(--space-5)}
+.sg .t1{font-family:'Roboto Slab',serif;font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:400}
+.sg .t2{font-family:'Work Sans',sans-serif;font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:400}
+.sg .sw{display:flex;gap:10px;margin-top:var(--space-4)}.sg .sw i{width:44px;height:44px;display:block}
+.iso{aspect-ratio:3430/2287;max-height:110vh;background:#fff}
+.cmp{grid-column:5/13;margin-top:var(--space-8);border-top:1px solid rgba(27,59,111,.16)}
+.cmp-r{display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-5);padding:var(--space-4) 0;border-bottom:1px solid rgba(27,59,111,.1);align-items:baseline}
+.cmp-r.h{font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.6)}
+.cmp-r span:first-child{font-size:14px;color:rgba(27,59,111,.85)}
+.cmp-r.h span:first-child{font-size:11px;color:rgba(27,59,111,.6)}
+.cmp-r b{font-family:var(--slab);font-weight:400;font-size:clamp(1.3rem,2.2vw,2rem);letter-spacing:-.02em}
+.cmp-r b.o{color:rgba(27,59,111,.45)}
+.cz{padding:var(--space-9) 0 var(--space-8)}
+.cz .k{grid-column:1/4;color:rgba(27,59,111,.78)}
+.cz-p{grid-column:5/13;font-family:var(--slab);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.25;letter-spacing:-.02em;color:var(--sh);text-wrap:pretty}
+.cz-meta{grid-column:1/13;margin-top:var(--space-8);padding-top:var(--space-5);border-top:1px solid rgba(27,59,111,.16);display:flex;gap:24px;font-size:11px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.72)}
+.cz-meta strong{color:var(--sh);font-weight:var(--fw-regular)}
+@media (max-width:1024px){
+.hd .k,.hd .sh-h,.hd .sh-p,.q,.flow,.flow-l,.stats,.nav4,.sg,.cmp,.cz-p,.cz .k{grid-column:1/13}
+.hd .sh-h{margin-top:var(--space-4)}.cz-p{margin-top:var(--space-5)}
+.sk-c{grid-column:1/13;order:2;margin-top:var(--space-5)}.sk-i{grid-column:1/13}
+.scr4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.op-row{flex-direction:column;gap:var(--space-3)}.op-row ul{justify-content:flex-start}
+}
+@media (max-width:640px){
+:root{--bleed-l:var(--space-5)}
+.sec{padding:var(--space-8) 0}
+.hero{aspect-ratio:1/1}.hero>img{object-position:50% 50%}
+.pair,.scr3{grid-template-columns:1fr;gap:var(--space-6)}
+.eq{flex-direction:column;gap:var(--space-6)}.eq>figure{flex:none!important;width:100%}
+.stats{grid-template-columns:1fr;gap:var(--space-5)}
+.nav4{grid-template-columns:1fr 1fr;row-gap:var(--space-4)}
+.sg{grid-template-columns:1fr}
+.scr4{gap:var(--space-4)}
+.iso{aspect-ratio:1}
+.cmp-r{grid-template-columns:1.4fr 1fr 1fr;gap:var(--space-3)}
+.cz{padding:var(--space-8) 0 var(--space-7)}.cz-meta{flex-direction:column;gap:8px}
+}
+.xr{cursor:pointer;transition:none}.xr .xw{-webkit-mask-image:none;mask-image:none;transition:opacity .6s cubic-bezier(.4,0,.2,1)}.xr.on .xw{opacity:0}.xr.rd{border-radius:0}
+.scr{aspect-ratio:auto;overflow:visible;container-type:normal}.scr img{transition:none;transform:none!important;border-radius:var(--radius-lg)}
+@media (hover:none){.scr{overflow:visible}}
+.pg3{margin-left:calc(25px - var(--bleed-l));margin-right:calc(25px - var(--bleed-l));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:start}.pg3 .xr.rd{border-radius:var(--radius-lg)}.pg3 .xr.rd .xw{object-fit:cover;object-position:top}.pg3 figure{min-width:0}.pg3 figcaption.cp{padding:0!important;text-align:center;white-space:nowrap}@media (max-width:640px){.pg3{grid-template-columns:1fr;gap:var(--space-6)}}
+.xl{position:absolute;z-index:3;pointer-events:none;background:#fff;color:var(--sh);font-size:11px;font-weight:500;letter-spacing:var(--ls-wide);text-transform:uppercase;padding:5px 9px;border-radius:var(--radius-md);line-height:1.2;white-space:nowrap}@media (max-width:640px){.xl{font-size:9px;padding:3px 6px}}
+.tg{grid-column:1/13;margin-top:var(--space-8);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)}.tg.tc{margin-top:var(--space-5)}
+.tp{background:#fff;border:1px solid rgba(27,59,111,.08);border-radius:var(--radius-lg);padding:clamp(20px,3vw,48px);display:flex;flex-direction:column;gap:var(--space-4);color:#1B1B1B;min-width:0}.tp-aa{font-size:clamp(5rem,12vw,10rem);line-height:.9;letter-spacing:-.02em}.tp-n{font-size:clamp(1.5rem,2.4vw,2.2rem);padding-top:var(--space-4);border-top:1px solid rgba(27,59,111,.16)}.tp-a{font-size:clamp(.95rem,1.5vw,1.3rem);line-height:1.6;overflow-wrap:anywhere;color:rgba(27,27,27,.85)}
+.tw{border-radius:var(--radius-lg);min-height:clamp(130px,16vw,220px);padding:clamp(16px,2vw,28px);display:flex;flex-direction:column;justify-content:space-between;min-width:0}.tw b{font-family:var(--font-sans);font-size:14px;font-weight:500}.tw span{font-size:13px;line-height:1.6}
+@media (max-width:640px){.tg{grid-template-columns:1fr}}
+.ca{display:grid;grid-template-columns:subgrid;grid-column:1/13;align-items:start}.ca-t{grid-column:1/5;display:flex;flex-direction:column;gap:var(--space-4)}.ca figure{grid-column:5/13;min-width:0}.ca-l{width:fit-content;font-size:12px;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--sh);border-bottom:1px solid currentColor;padding-bottom:3px;transition:color .3s}.ca-l:hover{color:var(--accent)}.ca-l span{display:inline-block;transition:transform .3s}.ca-l:hover span{transform:translateX(4px)}@media (max-width:1024px){.ca-t,.ca figure{grid-column:1/13}.ca figure{margin-top:var(--space-5)}}
+main figure:not(.full) img,main .sk-i img,main .ca img{border-radius:8px}
+main .xr img,main .xw img{border-radius:0}
+main .panel{border-radius:8px;overflow:hidden}main .panel.zm{overflow:hidden}main .bleed .panel{border-radius:0}
+.pc-m{grid-column:5/13;font-size:11px;font-weight:500;letter-spacing:var(--ls-wide);text-transform:uppercase;color:rgba(27,59,111,.78)}
+.hd .pc-p{grid-column:5/11;margin-top:var(--space-4)}.hd .pc-m+.pc-p{margin-top:var(--space-4)}
+.pc-l{grid-column:5/13;margin-top:var(--space-5);width:fit-content;font-size:11px;font-weight:500;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--sh);display:inline-flex;gap:var(--space-2);align-items:baseline;border-bottom:1px solid rgba(27,59,111,.3);padding-bottom:3px;transition:color .5s cubic-bezier(.16,.8,.24,1),border-color .5s}
+.pc-l .arrow{color:var(--accent);transition:transform .5s cubic-bezier(.16,.8,.24,1)}.pc-l:hover{color:var(--accent);border-color:var(--accent)}.pc-l:hover .arrow{transform:translateX(6px)}
+@media (max-width:1024px){.pc-m,.hd .pc-p,.pc-l{grid-column:1/13}.pc-m{margin-top:var(--space-4)}}
+.pc-l{white-space:nowrap;flex-wrap:nowrap}.hd .k{white-space:nowrap}
+@media (max-width:640px){.next-project{padding:var(--space-5) 0 var(--space-6)}.next-inner{gap:var(--space-3)}.next-link{font-size:15px!important;gap:8px;white-space:nowrap;min-height:44px}.next-link:hover .arrow{transform:translateX(4px)}.next-link.prev:hover .arrow{transform:translateX(-4px)}.xr .xw,.hint{display:none}}
+.fc{display:none}
+@media (max-width:640px){.appfig>.xr{display:none}.fc{display:block;padding:0 var(--space-3);color:#fff}.fc-h{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);padding:0 44px;margin-bottom:var(--space-3)}.fc-t{font-family:'Roboto Slab',serif;font-size:1.2rem;line-height:1.2;color:#fff}.fc-n{flex:none;font-size:12px;letter-spacing:var(--ls-wide);color:rgba(255,255,255,.75)}.fc-st{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:0}.fc-vp{position:relative;height:clamp(300px,calc(100svh - 250px),620px)}.fc-s{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(.16,.8,.24,1),visibility 0s linear .7s}.fc-s.on{opacity:1;visibility:visible;transition:opacity .7s cubic-bezier(.16,.8,.24,1)}.fc-s{display:flex;align-items:center;justify-content:center}.fc-s img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}.fc-b{width:44px;height:44px;border-radius:50%;background:none;border:0;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color .4s}.fc-b:hover{color:var(--accent)}.fc-b:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}}
+@media (prefers-reduced-motion:reduce){.fc-s,.fc-s.on{transition:none}}
+</style>
+</head>
+<body>
+<header class="site">
+<div class="grid">
+<a class="logo" href="index.html" aria-label="The Noir Haus" style="height:45px"><img src="./asset-1-3000-msk4z5c7-dc0f.png" alt="The Noir Haus" style="width:56px;height:43px"></a>
+<button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+<nav class="primary">
+<a href="Work.html">Work</a>
+<a href="Studio.html">Studio</a>
+<a class="nav-cta" href="Enquire.dc.html">Enquiries</a>
+</nav>
+</div>
+</header>
+<main>
+<figure class="full hero" data-screen-label="Hero"><img src="assets/samshope/macbook.png" alt="The redesigned Sam's Hope homepage on a laptop"><figcaption class="hero-k"><div class="grid"><div class="k"><span>UX / UI Design / Non-profit</span><span>Website Redesign</span></div></div></figcaption></figure>
+<section class="op" data-screen-label="Opening"><div class="grid">
+<h1>Sam's Hope</h1>
+<div class="op-row"><span class="sub">A website redesign for a pet-assistance non-profit</span><ul><li>Research</li><li>Information Architecture</li><li>UX / UI Design</li></ul></div>
+</div></section>
+<section class="sec ov" data-screen-label="Overview"><div class="grid"><div class="hd">
+<span class="k"><span>Overview</span></span>
+<p class="sh-h">Two kinds of visitor. One asks for help, the other wants to give it.</p>
+<p class="sh-p">Sam's Hope is a 501(c)(3) non-profit, founded in 2013, that keeps pets and their people together through pet food and veterinary care assistance in Bucks, Montgomery and Philadelphia Counties. The redesign set out to give both visitors a clear way in.</p>
+</div></div></section>
+<section class="sec" data-screen-label="01 Challenge" style="padding-top:0"><div class="grid">
+<div class="hd"><span class="k"><span>01 &nbsp;The Challenge</span></span><p class="sh-h">Help was there. It was hard to reach.</p>
+<p class="sh-p">Applying for assistance meant downloading a form, printing it, filling it in by hand, scanning it and emailing it back. Navigation and long passages of text made the programs themselves hard to find.</p></div>
+<div class="flow" aria-label="Existing application process"><span class="s">Download</span><span class="a">→</span><span class="s">Print</span><span class="a">→</span><span class="s">Fill</span><span class="a">→</span><span class="s">Scan</span><span class="a">→</span><span class="s">Submit</span></div>
+<div class="q"><span class="cp">Problem statement</span><p>Our pet owners can't afford to take care of their pets because they have limited income. Our solution should give users the ability to financially support the user and their pet, rather than giving up their pets.</p></div>
+<div class="pair ph">
+<figure><img src="assets/samshope/board-problem.jpg" alt="Whiteboard: affinity clusters, problem statement and how-might-we notes"><figcaption class="cp">Affinity clusters, problem statement and how-might-we</figcaption></figure>
+<figure><img src="assets/samshope/board-workflow.jpg" alt="Whiteboard: primary user workflow and project goals"><figcaption class="cp">The existing workflow and project goals</figcaption></figure>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Project Context" style="padding-top:0"><div class="grid"><div class="hd"><span class="k"><span>Project Context</span></span>
+<span class="pc-m">Academic project · Real-world collaboration</span>
+<p class="sh-p pc-p">This project was completed as part of an academic UX program in collaboration with Sam's Hope, a nonprofit organization supporting pet owners. Our team worked directly with the organization's leadership and staff throughout the research and design process to understand their needs, evaluate the existing experience, and develop a proposed redesign.</p>
+<p class="sh-p pc-p">The proposed redesign was not implemented due to the organization's resource constraints. The work presented here represents the research, recommendations, and proposed experience developed during the project.</p>
+<a class="pc-l" href="https://samshope.org" target="_blank" rel="noopener">View the existing website<span class="arrow">→</span></a></div></div></section>
+<section class="sec" data-screen-label="02 Research" style="padding-top:0"><div class="grid">
+<div class="hd"><span class="k"><span>02 &nbsp;Research</span></span><p class="sh-h">A tree test of the existing site.</p>
+<p class="sh-p">Participants were asked to find things on the current navigation, from community partners to how to qualify for pet food assistance.</p></div>
+<div class="stats"><div><b>17</b><span>Participants</span></div><div><b>42%</b><span>Average success</span></div><div><b>2m 53s</b><span>Median time</span></div></div>
+<figure class="blk"><div class="panel"><img src="assets/samshope/tree-tasks.png" alt="Tree test results for two tasks on the existing site"></div><figcaption class="cp">Finding community partners: 35% success. Finding pet food assistance: 59%.</figcaption></figure>
+</div></section>
+<section class="sec dark" data-screen-label="03 Users"><div class="grid">
+<div class="hd"><span class="k"><span class="n">03</span><span>Users</span></span><p class="sh-h">Richard needs support for his dog. Jonathan wants to offer it.</p>
+<p class="sh-p">Two personas, both in Philadelphia, shaped the site's two paths: one seeking assistance on a fixed income, one looking for an organisation he can trust with his money.</p></div>
+<div class="eq blk bleed pe">
+<figure style="flex:1"><img src="assets/samshope/persona-richard.png" alt="Persona: Richard, seeking assistance"><figcaption class="cp">Richard - seeking assistance</figcaption></figure>
+<figure style="flex:1"><img src="assets/samshope/persona-jonathan.png" alt="Persona: Jonathan, providing assistance"><figcaption class="cp">Jonathan - providing assistance</figcaption></figure>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Journey"><div class="grid">
+<div class="hd"><span class="k"><span>Journey</span></span><p class="sh-h">"I have to print out this form? I wish it was online."</p>
+<p class="sh-p">Joseph's journey map follows a retired mechanic and his 12-year-old Labrador from the first worry to a confirmed application. The lowest point after finding Sam's Hope came at the form itself.</p></div>
+<figure class="blk"><div class="panel zm"><img src="assets/samshope/journey.png" alt="User journey map for Joseph, from motivation to confirmation"></div><figcaption class="cp">Feelings, pain points and opportunities across six stages</figcaption></figure>
+</div></section>
+<section class="sec" data-screen-label="04 Structure" style="padding-top:0"><div class="grid">
+<div class="hd"><span class="k"><span>04 &nbsp;Information Architecture</span></span><p class="sh-h">Four headings, one word each.</p>
+<p class="sh-p">Card sorting regrouped the site's many pages. The navigation settled on four short labels, and the homepage splits early into two paths: I need pet assistance, and I can help.</p></div>
+<ol class="nav4"><li><small>01</small>About</li><li><small>02</small>Programs</li><li><small>03</small>How to help</li><li><small>04</small>Community</li></ol>
+<figure class="blk bleed"><div class="panel zm" style="border-left:0;border-right:0"><img src="assets/samshope/card-sort.jpg" alt="Card sorting results"></div><figcaption class="cp">Card sorting</figcaption></figure>
+<div class="ca blk"><div class="ca-t"><span class="cp" style="margin:0">Content audit</span><p class="sh-p">Every page on the existing site, listed by ID, heading, URL, purpose and audience, across six sections: About, Programs, How to Help, Community, Resources and Memorials.</p><a class="ca-l" href="https://docs.google.com/spreadsheets/d/1L4wq0VBOnmTmyiOnC0N4tTC8lc9mb2gyCL8mWNSmzsc/edit?gid=1286556201#gid=1286556201" target="_blank" rel="noopener">View the content audit <span>→</span></a></div><figure><div class="panel zm"><img src="assets/samshope/content-audit.png" alt="Content audit spreadsheet, About tab"></div><figcaption class="cp">Content audit - About tab</figcaption></figure></div>
+<figure class="blk"><div class="panel zm"><img src="assets/samshope/sitemap.jpg" alt="Sitemap of the redesigned site"></div><figcaption class="cp">Sitemap</figcaption></figure>
+</div></section>
+<section class="sec" data-screen-label="05 Wireframes" style="padding-top:0"><div class="grid">
+<div class="hd"><span class="k"><span>05 &nbsp;Ideation - Crazy 8's</span></span><p class="sh-h">Less writing. A better menu. Calm, big colour.</p></div>
+<div class="sk">
+<div class="sk-c"><span class="cp" style="margin:0">Notes from the sketches</span><ul><li>Less writing</li><li>Better menu</li><li>Calm, big colours</li><li>One-word menu labels</li></ul></div>
+<div class="sk-i"><img src="assets/samshope/sketches.jpg" alt="Paper sketches of homepage layouts"></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="06 Redesign" style="padding-top:0;background:#E3EBF7;padding-top:var(--space-9)"><div class="grid">
+<div class="hd"><span class="k"><span>06 &nbsp;The Redesign</span></span><p class="sh-h">Navy, yellow and real stories.</p>
+<p class="sh-p">A fixed side navigation, full-width photography and recipient stories up front. The two paths sit side by side in blue and yellow, and programs carry their eligibility in plain terms.</p></div>
+<div class="pg3 bleed blk" style="margin-top:var(--space-8)"><figure><figcaption class="cp" style="margin:0 0 var(--space-3);padding:0 var(--bleed-l)">Homepage</figcaption><div class="xr rd" style="aspect-ratio:1171/2576"><img class="xf" src="assets/samshope/home.png" alt="Homepage - final design"><img class="xw" src="assets/samshope/w-home.png" alt="Homepage - wireframe"></div></figure><figure><figcaption class="cp" style="margin:0 0 var(--space-3);padding:0 var(--bleed-l)">Our programs page</figcaption><div class="xr rd" style="aspect-ratio:1456/2550"><img class="xf" src="assets/samshope/programs.png" alt="Our programs page - final design"><img class="xw" src="assets/samshope/w-programs.png" alt="Our programs page - wireframe"></div></figure><figure><figcaption class="cp" style="margin:0 0 var(--space-3);padding:0 var(--bleed-l)">About page</figcaption><div class="xr rd" style="aspect-ratio:1519/2408"><img class="xf" src="assets/samshope/about.png" alt="About page - final design"><img class="xw" src="assets/samshope/w-about.png" alt="About page - wireframe"></div></figure></div><p class="cp hint" style="grid-column:1/13;margin-top:var(--space-4);text-align:center">Hi-fi designs, laid over wireframes - hover a page to reveal</p>
+
+</div></section>
+<section class="sec" data-screen-label="Style Guide" style="padding-top:50px"><div class="grid">
+<div class="hd"><span class="k"><span>Style Guide</span></span><p class="sh-h">Roboto Slab for headings. Work Sans for text.</p><p class="sh-p">The brand's blue and yellow were retained, keeping the Sam's Hope identity alive in the redesign.</p></div>
+<div class="tg">
+<div class="tp"><span class="cp" style="margin:0">Headings</span><p class="tp-aa" style="font-family:'Roboto Slab',serif;font-weight:400">Aa</p><p class="tp-n" style="font-family:'Roboto Slab',serif;font-weight:400">Roboto Slab</p><p class="tp-a" style="font-family:'Roboto Slab',serif;font-weight:600">AaBbCcDdEeFfGgHhIiJjKkLlMmN<br>nOoPpQqRrSsTtUuVvWwXxYyZz</p></div>
+<div class="tp"><span class="cp" style="margin:0">Text</span><p class="tp-aa" style="font-family:'Work Sans',sans-serif;font-weight:300">Aa</p><p class="tp-n" style="font-family:'Work Sans',sans-serif;font-weight:400">Work Sans</p><p class="tp-a" style="font-family:'Work Sans',sans-serif;font-weight:300">AaBbCcDdEeFfGgHhIiJjKkLlMmNnO<br>oPpQqRrSsTtUuVvWwXxYyZz</p></div>
+</div>
+<div class="tg tc">
+<div class="tw" style="background:#3479D2;color:#fff"><b>Bright Navy Blue</b><span>#3479D2<br>RGB 52, 121, 210</span></div>
+<div class="tw" style="background:var(--sh-y);color:#1B1B1B"><b>Maximum Yellow Red</b><span>#F9B93E<br>RGB 249, 185, 62</span></div>
+</div>
+</div></section>
+<section class="sec dark" data-screen-label="07 Application"><div class="grid">
+<div class="hd"><span class="k"><span class="n">07</span><span>Application Experience</span></span><p class="sh-h">From a printed form to four steps online.</p>
+<p class="sh-p">A start page lists every document needed before anything is filled in. Then Applicant, Pet, Medical &amp; Vet and Financials, each with a visible step marker, ending in a review page with a digital signature.</p></div>
+<figure class="blk bleed appfig"><div class="xr rd" style="aspect-ratio:5027/4903"><img class="xf" src="assets/samshope/final-app.png" alt="All application screens"><img class="xw" src="assets/samshope/wire-app.png" alt="Wireframes: application steps and review"><span class="xl" style="left:calc(3.1% + 10px);top:calc(2.5% + 10px)">Start</span><span class="xl" style="left:calc(35.6% + 10px);top:calc(2.5% + 10px)">01 Applicant</span><span class="xl" style="left:calc(68.1% + 10px);top:calc(2.5% + 10px)">02 Pet</span><span class="xl" style="left:calc(3.1% + 10px);top:calc(41.9% + 10px)">03 Medical &amp; Vet</span><span class="xl" style="left:calc(35.6% + 10px);top:calc(41.9% + 10px)">04 Financials</span><span class="xl" style="left:calc(68.1% + 10px);top:calc(41.9% + 10px)">Review and sign</span></div><div class="fc" id="appcar" role="region" aria-roledescription="carousel" aria-label="Application steps"><div class="fc-h"><span class="fc-t" aria-live="off">Start</span><span class="fc-n">01 / 06</span></div><div class="fc-st"><button type="button" class="fc-b" data-d="-1" aria-label="Previous screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button><div class="fc-vp"><div class="fc-s" role="group" aria-roledescription="slide" aria-label="1 of 6: Start"><img src="assets/samshope/app-start.png" alt="Start - final design"></div><div class="fc-s" role="group" aria-roledescription="slide" aria-label="2 of 6: 01 Applicant"><img src="assets/samshope/app-applicant.png" alt="01 Applicant - final design" loading="lazy"></div><div class="fc-s" role="group" aria-roledescription="slide" aria-label="3 of 6: 02 Pet"><img src="assets/samshope/app-pet.png" alt="02 Pet - final design" loading="lazy"></div><div class="fc-s" role="group" aria-roledescription="slide" aria-label="4 of 6: 03 Medical &amp; Vet"><img src="assets/samshope/app-medical.png" alt="03 Medical &amp; Vet - final design" loading="lazy"></div><div class="fc-s" role="group" aria-roledescription="slide" aria-label="5 of 6: 04 Financials"><img src="assets/samshope/app-financial.png" alt="04 Financials - final design" loading="lazy"></div><div class="fc-s" role="group" aria-roledescription="slide" aria-label="6 of 6: Review and sign"><img src="assets/samshope/app-review.png" alt="Review and sign - final design" loading="lazy"></div></div><button type="button" class="fc-b" data-d="1" aria-label="Next screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div></div><figcaption class="cp hint">Application Hi-fi designs, laid over wireframes - hover to reveal</figcaption></figure>
+
+</div></section>
+<figure class="full iso" data-screen-label="Screens"><img src="assets/samshope/isometric.png" alt="Redesigned pages and application screens"></figure>
+<section class="sec" data-screen-label="08 Testing"><div class="grid">
+<div class="hd"><span class="k"><span>08 &nbsp;Usability Testing</span></span><p class="sh-h">The same test, on the new structure.</p>
+<p class="sh-p">Success went up and time to complete fell by more than half. The two rounds had different groups (17 and 8 participants), so the numbers show direction rather than proof.</p></div>
+<div class="cmp">
+<div class="cmp-r h"><span>Tree test</span><span>Before</span><span>After</span></div>
+<div class="cmp-r"><span>Average success</span><b class="o">42%</b><b>56%</b></div>
+<div class="cmp-r"><span>Median time</span><b class="o">2m 53s</b><b>1m 10s</b></div>
+<div class="cmp-r"><span>Direct success</span><b class="o">31.4%</b><b>40.6%</b></div>
+<div class="cmp-r"><span>Indirect failure</span><b class="o">8.8%</b><b>3.1%</b></div>
+</div>
+<figure class="blk"><div class="panel"><img src="assets/samshope/tree-before-after.png" alt="Tree test results before and after"></div><figcaption class="cp">Before and after</figcaption></figure>
+</div></section>
+<section class="cz" data-screen-label="09 Outcome"><div class="grid">
+<span class="k"><span>09 &nbsp;Outcome</span></span>
+<p class="cz-p">Asking for help no longer starts with a printer. Offering it starts on the homepage.</p>
+<div class="cz-meta"><strong>Sam's Hope</strong><span>Website Redesign</span><span>UX / UI Design</span></div>
+</div></section>
+</main>
+<section class="next-project"><div class="grid"><div class="next-inner">
+<a class="next-link prev" href="Adoro.dc.html"><span class="arrow">←</span>Previous Project</a>
+<a class="next-link" href="Design Tales.dc.html">Next Project<span class="arrow">→</span></a>
+</div></div></section>
+<footer class="site-footer">
+<div class="grid">
+<div class="ft-cta-row">
+<p class="ft-cta-sub" style="color: #FFFFFFBD">You bring the idea.<br>We'll make it make sense.</p>
+</div>
+<a class="ft-cta" href="mailto:thenoirhaus@outlook.in" target="_blank" rel="noopener noreferrer">Let's chat<span class="arrow">→</span></a>
+<div class="ft-divider"></div>
+<div class="ft-brand">
+<p class="ft-brand-name">the Noir Haus</p>
+<p class="ft-brand-desc">Independent creative studio creating identities, digital experiences and printed matter.</p>
+</div>
+<nav class="ft-group ft-explore">
+<p class="ft-group-label">Explore</p>
+<a href="Work.html">Work</a><a href="index.html#services">Services</a><a href="Studio.html">Studio</a><a href="Enquire.dc.html">Enquiries</a>
+</nav>
+<nav class="ft-group ft-contact">
+<p class="ft-group-label">Contact</p>
+<a href="mailto:thenoirhaus@outlook.in" target="_blank" rel="noopener noreferrer">Email</a><a href="https://www.instagram.com/thenoirhaus/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/riya-patel-103ab422a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</nav>
+<div class="ft-divider ft-divider-b"></div>
+<p class="ft-copy">© 2026 The Noir Haus</p>
+</div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top"><svg class="st-ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="st-t" cx="24" cy="24" r="23.25"></circle><circle class="st-p" cx="24" cy="24" r="23.25"></circle></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+<script>
+const __mt=document.querySelector('.menu-toggle');if(__mt)__mt.addEventListener('click',function(){const n=document.querySelector('nav.primary');const open=n.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)});document.querySelectorAll('nav.primary a').forEach(a=>a.addEventListener('click',()=>{const n=document.querySelector('nav.primary'),t=document.querySelector('.menu-toggle');if(!n||!n.classList.contains('open'))return;n.classList.remove('open');if(t){t.classList.remove('open');t.setAttribute('aria-expanded','false')}document.body.classList.remove('menu-open')}));
+const __header=document.querySelector('header.site');
+let __lastY=window.scrollY,__navTicking=false;
+function __navScroll(){__navTicking=false;const y=window.scrollY;const delta=y-__lastY;if(y<=8){__header.classList.remove('nav-hidden')}else if(delta>24){__header.classList.add('nav-hidden');__lastY=y}else if(delta<-90){__header.classList.remove('nav-hidden');__lastY=y}}
+window.addEventListener('scroll',()=>{if(!__navTicking){__navTicking=true;requestAnimationFrame(__navScroll)}},{passive:true});
+__navScroll();
+const __st=document.querySelector('.scroll-top');if(__st){__st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));let __stTick=false;function __stCheck(){__stTick=false;__st.classList.toggle('visible',window.scrollY>window.innerHeight*.6)}window.addEventListener('scroll',()=>{if(!__stTick){__stTick=true;requestAnimationFrame(__stCheck)}},{passive:true});__stCheck()}
+</script>
+<script>document.querySelectorAll(".zm").forEach(function(p){var i=p.querySelector("img");if(!i)return;p.addEventListener("mousemove",function(e){var b=p.getBoundingClientRect();i.style.transformOrigin=(e.clientX-b.left)+"px "+(e.clientY-b.top)+"px";i.style.transform="scale(2.2)"});p.addEventListener("mouseleave",function(){i.style.transform=""})})</script><script>document.querySelectorAll(".xr").forEach(function(x){x.addEventListener("mouseenter",function(){x.classList.add("on")});x.addEventListener("mouseleave",function(){x.classList.remove("on")});x.addEventListener("click",function(e){if(!matchMedia("(hover:hover)").matches)x.classList.toggle("on")})})</script><script>(function(){const r=document.getElementById("appcar");if(!r)return;const NM=["Start","01 Applicant","02 Pet","03 Medical & Vet","04 Financials","Review and sign"],sl=[...r.querySelectorAll(".fc-s")],tE=r.querySelector(".fc-t"),nE=r.querySelector(".fc-n"),mq=matchMedia("(max-width:640px)");let i=0,vis=false,tm=null;
+function show(k){i=(k+sl.length)%sl.length;sl.forEach((s,j)=>{s.classList.toggle("on",j===i);s.setAttribute("aria-hidden",j!==i)});tE.textContent=NM[i];nE.textContent=String(i+1).padStart(2,"0")+" / 06"}
+function run(){clearInterval(tm);tm=null;if(vis&&mq.matches)tm=setInterval(()=>show(i+1),5000)}
+r.querySelectorAll(".fc-b").forEach(b=>b.addEventListener("click",()=>{show(i+Number(b.dataset.d));run()}));
+let x0=null;const st=r.querySelector(".fc-st");st.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});st.addEventListener("touchend",e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(d)>40){show(i+(d<0?1:-1));run()}});
+mq.addEventListener("change",run);
+new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!vis)show(0);vis=v;run()},{threshold:.5}).observe(r);
+show(0)})();</script>
+<script>(function(){const b=document.querySelector(".scroll-top"),p=b&&b.querySelector(".st-p");if(!p)return;let q=false;function u(){q=false;const m=document.documentElement.scrollHeight-innerHeight,r=m>0?Math.min(1,Math.max(0,scrollY/m)):0;p.style.strokeDashoffset=(146.08*(1-r)).toFixed(2)}addEventListener("scroll",()=>{if(!q){q=true;requestAnimationFrame(u)}},{passive:true});addEventListener("resize",u);u()})();</script>
+</body>
+</html>
